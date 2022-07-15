@@ -9,13 +9,16 @@ const theme: ThemeOptions = createTheme({
         styleOverrides:{
           root:{
             '&:hover': { color: '#0ddca6', opacity: 1 }, 
+              
           }
-          } 
-          },
+        } 
+      },
           MuiTabs:{
             styleOverrides:{
               root:{
-                '& .Mui-selected': { color: '#0ddca6' }
+                boxShadow: 'none',
+                '& .Mui-selected': { color: '#0ddca6' },
+                '& .MuiTabs-indicator': { display: 'none' }
               }
             } 
           }

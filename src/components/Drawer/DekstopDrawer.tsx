@@ -67,10 +67,6 @@ export default function DekstopDrawer(props: any) {
 
   const [value, setValue] = React.useState(0);
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-  };
-
   return (
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
@@ -79,25 +75,26 @@ export default function DekstopDrawer(props: any) {
             sx={{
                 width: { sm: `calc(100%)` },
                 ml: { sm: `${drawerWidth}px` },
+                height: '120px'
             }}
             style={{zIndex: 1301}}
         >        
             <Toolbar>
-              <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
-                <Link href={'/'}> 
+              {/* <Typography variant="h6" noWrap component="div"> */}
+                <div style={{ display: 'flex', justifyContent: 'center', alignContent: 'center' }}>
                   {GlobalConstants.APP_Name}
-                </Link> 
-              </Typography>
-            <FormControlLabel
+                </div>
+              {/* </Typography> */}
+            {/* <FormControlLabel
                 value="top"
                 control={<Switch color="secondary" />}
                 label=''
-            />
+            /> */}
             </Toolbar>
             <TabMenu />
         </AppBar>
         <DrawerHeader />
-          <div style={{ marginTop: '110px' }}>
+          <div style={{ marginTop: '120px' }}>
             {children}
           </div>
       </Box>
