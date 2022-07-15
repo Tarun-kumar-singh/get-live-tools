@@ -33,13 +33,9 @@ const TabMenu = (props: Props) =>{
                 >
                 {TabList.map((tab: { label: string, route: string }, index: number) => (
                     <Tab 
-                      sx={{  
-                          '&:hover': { color: 'secondary.main', opacity: 1 }, 
-                          '&.Mui-selected': { color: 'secondary.main' }
-                        }} 
-                          key={tab.label} 
-                          onClick={(e): any => handleChange(e, index, tab.route)} 
-                          label={tab.label} 
+                      key={tab.label} 
+                      onClick={(e): any => handleChange(e, index, tab.route)} 
+                      label={tab.label} 
                     />
                 ))}
                 </Tabs>

@@ -5,15 +5,19 @@ import { PaletteSettings, TypographySettings } from "./setting";
 const theme: ThemeOptions = createTheme({
 
     components:{
-      MuiTabs:{
+      MuiTab:{
         styleOverrides:{
           root:{
-            // background: 'red',
-            // '&.hover': { color: 'green' }
-            // '&:hover': { color: 'secondary.main', opacity: 1 }, 
-            // '& .Mui-selected': { color: 'secondary.main' }
+            '&:hover': { color: '#0ddca6', opacity: 1 }, 
           }
           } 
+          },
+          MuiTabs:{
+            styleOverrides:{
+              root:{
+                '& .Mui-selected': { color: '#0ddca6' }
+              }
+            } 
           }
         },
 
