@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography';
 import Link from 'next/link';
 import { GlobalConstants } from '../../constants/GlobalConstants';
 import { FormControlLabel, Switch, Tab, Tabs } from '@mui/material';
+import TabMenu from './TabMenu';
 
 const drawerWidth = 240;
 
@@ -93,27 +94,7 @@ export default function DekstopDrawer(props: any) {
                 label=''
             />
             </Toolbar>
-              <Box sx={{ 
-                width: { lg: '100vw' },  
-              }}>
-                <Tabs
-                  value={value}
-                  onChange={handleChange}
-                  variant="scrollable"
-                  scrollButtons
-                  allowScrollButtonsMobile
-                  textColor='inherit'
-                  indicatorColor="secondary"
-                >
-                  <Tab label="Item One" />
-                  <Tab label="Item Two" />
-                  <Tab label="Item Three" />
-                  <Tab label="Item Four" />
-                  <Tab label="Item Five" />
-                  <Tab label="Item Six" />
-                  <Tab label="Item Seven" />
-                </Tabs>
-              </Box> 
+            <TabMenu />
         </AppBar>
         <DrawerHeader />
           <div style={{ marginTop: '110px' }}>
