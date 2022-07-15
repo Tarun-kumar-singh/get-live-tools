@@ -3,9 +3,9 @@ export const GlobalConstants = {
 }
 
 export const Tabs = [
-    {label: 'Image', route: '/about'},
-    {label: 'You tube', route: '/contact-us'},
-    {label: 'Text manipulation', route: '/contact-us'}
+    {label: 'Image tools', route: '/about'},
+    {label: 'You tube tools', route: '/contact-us'},
+    {label: 'Text tools', route: '/contact-us'}
 ]
 
 
