@@ -10,7 +10,7 @@ import ImgBlankNWhite from '../../components/image/ImgBlankNWhite';
 const getToolsComponent = (componentName: string) => {
 
   if(componentName === 'ImageBlackNWhite'){
-    <ImgBlankNWhite />
+   return <ImgBlankNWhite />
   }
 
 }
@@ -32,6 +32,8 @@ const Index: NextPage = () => {
 
   const onToolCardClick = (data: any) =>{
     console.log(data)
+    setSelectedTools(data.name)
+    router.replace(router.pathname + '#' + data.name)
   }
 
   return (
