@@ -5,7 +5,7 @@ import { Box } from "@mui/system";
 
 type Props = {
     title: string,
-    Icon?: React.ReactElement<SvgIconProps> 
+    Icon?: any 
 }
 const useStyles = makeStyles({
     spacing:{
@@ -31,7 +31,7 @@ const ToolsCard = (props: Props): JSX.Element =>{
                 <CardContent>
                   <Box sx={{ display:'flex', justifyContent: 'center',  }}>
                     <Avatar sx={{ width: '100%', height: '55px', bgcolor: '#0ddca6' }} variant="rounded">
-                     { Icon?  <Icon /> :  <FolderIcon />}
+                     { Icon ||  title[0].toUpperCase()}
                     </Avatar>
                   </Box>
                 </CardContent>    
