@@ -7,6 +7,11 @@ const Index: NextPage = () => {
 
   return (
     <>
+    <Box sx={{
+       marginLeft: '20%',
+       marginRight: '20%',
+       marginTop: '50px',
+    }}>
       <div style={{  display: 'flex', justifyContent: 'center' }}>
         <div style={{ marginTop: '20px', display: 'flex', flexDirection: 'row', gap: '10px', flexWrap: 'wrap' }}>
           {
@@ -16,6 +21,7 @@ const Index: NextPage = () => {
           }
         </div>
       </div>
+    </Box>
     </>
   )
 }
