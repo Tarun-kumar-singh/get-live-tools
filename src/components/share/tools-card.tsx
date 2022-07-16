@@ -1,10 +1,11 @@
-import { Avatar, Card, CardActionArea, CardActions, CardContent, Typography } from "@mui/material"
+import { Avatar, Card, CardActionArea, CardActions, CardContent, SvgIconProps, Typography } from "@mui/material"
 import makeStyles from "@mui/styles/makeStyles";
 import FolderIcon from '@mui/icons-material/Folder';
 import { Box } from "@mui/system";
 
 type Props = {
-    title: string
+    title: string,
+    Icon?: React.ReactElement<SvgIconProps> 
 }
 const useStyles = makeStyles({
     spacing:{
@@ -14,7 +15,7 @@ const useStyles = makeStyles({
 const ToolsCard = (props: Props): JSX.Element =>{
     
     const classes = useStyles()
-    const { title } = props
+    const { Icon, title } = props
 
     return(
         <>
@@ -29,19 +30,18 @@ const ToolsCard = (props: Props): JSX.Element =>{
             >           
                 <CardContent>
                   <Box sx={{ display:'flex', justifyContent: 'center',  }}>
-                    <Avatar variant="rounded">
-                        <FolderIcon />
+                    <Avatar sx={{ width: '100%', height: '55px', bgcolor: '#0ddca6' }} variant="rounded">
+                     { Icon?  <Icon /> :  <FolderIcon />}
                     </Avatar>
                   </Box>
                 </CardContent>    
 
-                <CardActions sx={{ 
-                    MuiCardActions:{
-                        display:'flex',
-                        justifyContent: 'center'
-                    }
-                }} >
-                    <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '0px' }}>
+                <CardActions>
+                    <div style={{ 
+                        display: 'flex', 
+                        justifyContent: 'center', 
+                        width: '100%'
+                    }}>
                         <Typography variant="body2">
                             {title}
                         </Typography>
