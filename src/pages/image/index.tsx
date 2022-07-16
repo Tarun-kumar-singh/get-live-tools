@@ -1,8 +1,7 @@
 import { Box } from '@mui/material';
 import type { NextPage } from 'next'
 import ToolsCard from '../../components/share/tools-card';
-import { ImageTools } from '../../constants/image';
-import FolderIcon from '@mui/icons-material/Folder';
+import { ImageTools } from '../../constants/tools/image';
 
 const Index: NextPage = () => {
 
