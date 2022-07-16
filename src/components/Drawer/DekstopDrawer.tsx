@@ -77,20 +77,20 @@ export default function DekstopDrawer(props: any) {
                 ml: { sm: `${drawerWidth}px` },
                 height: '120px'
             }}
-            style={{zIndex: 1301}}
+            // style={{zIndex: 1301}}
         >        
-            <Toolbar>
-              {/* <Typography variant="h6" noWrap component="div"> */}
-                <div style={{ display: 'flex', justifyContent: 'center', alignContent: 'center' }}>
+                <div style={{ marginTop:'10px', display: 'flex', justifyContent: 'center', alignContent: 'center' }}>
+                 <Typography variant='subtitle1'>
                   {GlobalConstants.APP_Name}
+                 </Typography>
                 </div>
-              {/* </Typography> */}
+            {/* <Toolbar> */}
             {/* <FormControlLabel
                 value="top"
                 control={<Switch color="secondary" />}
                 label=''
             /> */}
-            </Toolbar>
+            {/* </Toolbar> */}
             <TabMenu />
         </AppBar>
         <DrawerHeader />
