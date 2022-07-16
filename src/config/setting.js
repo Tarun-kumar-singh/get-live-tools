@@ -26,7 +26,7 @@ export const PaletteSettings =  {
 export const TypographySettings = {
     subtitle1: {
         fontSize: '2rem',
-        fontWeight: 200,
+        fontWeight: 700,
       },
       body1: {
         fontSize: '1.4rem',
