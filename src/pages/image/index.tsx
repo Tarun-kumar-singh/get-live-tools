@@ -29,7 +29,6 @@ const Index: NextPage = () => {
     }
   }, [])
 
-
   const onToolCardClick = (data: any) =>{
     console.log(data)
     setSelectedTools(data.name)
