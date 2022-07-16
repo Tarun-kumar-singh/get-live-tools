@@ -16,7 +16,7 @@ const Index: NextPage = () => {
         <div style={{ marginTop: '20px', display: 'flex', flexDirection: 'row', gap: '10px', flexWrap: 'wrap' }}>
           {
               ImageTools.map((el: any) =>(
-                <ToolsCard title={el.label} />
+                <ToolsCard key={el.label} title={el.label} />
               ))
           }
         </div>
