@@ -5,7 +5,8 @@ import { Box } from "@mui/system";
 
 type Props = {
     title: string,
-    Icon?: any 
+    Icon?: any,
+    onToolCardClick?: (data: any) => void
 }
 const useStyles = makeStyles({
     spacing:{
@@ -15,7 +16,7 @@ const useStyles = makeStyles({
 const ToolsCard = (props: Props): JSX.Element =>{
     
     const classes = useStyles()
-    const { Icon, title } = props
+    const { Icon, onToolCardClick, title } = props
 
     return(
         <>
@@ -27,7 +28,8 @@ const ToolsCard = (props: Props): JSX.Element =>{
                     zIndex: 100 
                 }} 
                 style={{ height: '120px', width: '200px', zIndex: 10,  }} variant="outlined"
-            >           
+                onClick={onToolCardClick}
+           >           
                 <CardContent>
                   <Box sx={{ display:'flex', justifyContent: 'center',  }}>
                     <Avatar sx={{ width: '100%', height: '55px', bgcolor: '#0ddca6' }} variant="rounded">
