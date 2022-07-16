@@ -4,7 +4,7 @@ const Index: NextPage = () => {
 
   return (
     <div>
-        Index From Image
+        Index From Text tools
      </div>
   )
 }
