@@ -1,11 +1,9 @@
-import { useRouter } from "next/router";
 import { useState } from "react";
 
-const useSelectedToolName = () => {
+const getSelectedToolName = (router: any) => {
   
-  const router = useRouter()
   const [selectedTools, setSelectedTools] = useState<string>()
-  router.beforePopState(({ url, as, options }) => {   
+  router.beforePopState(({ url, as, options }: any) => {   
     if(!url.includes('#')){
       setSelectedTools('')
     }
@@ -19,6 +17,5 @@ const useSelectedToolName = () => {
 
 };
 
-export default useSelectedToolName;
-
+export default getSelectedToolName;
 

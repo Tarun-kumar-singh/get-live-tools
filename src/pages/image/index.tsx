@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import {useRouter} from 'next/router';
 import ImgBlankNWhite from '../../components/image/ImgBlankNWhite';
 import { addTagToUrl, getURlTagValue } from '../../hooks/useTagUrl';
-import useSelectedToolName from '../../hooks/useSelectedToolName';
+import getSelectedToolName from '../../utils/getSelectedTools';
 
 const getToolsComponent = (componentName: string) => {
 
@@ -25,14 +25,22 @@ const Index: NextPage = () => {
   const tagVal = getURlTagValue(router)
 
   useEffect(() =>{
+    router.beforePopState(({ url, as, options }: any) => {   
+      if(!url.includes('#')){
+        setSelectedTools('')
+      }
+      else{
+        setSelectedTools(url.split('#')[1])
+      }
+      return true
+    })
+  }, [])
+
+  useEffect(() =>{
     if(tagVal) {
       setSelectedTools(tagVal)
     }
   }, [tagVal])
-
-  useEffect(() => {
-    setSelectedTools(useSelectedToolName())
-  }, [])
 
   const onToolCardClick = (data: any) =>{
     setSelectedTools(data.name)
