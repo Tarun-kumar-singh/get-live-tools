@@ -5,7 +5,7 @@ import StickyHeadTable from "../share/table/stickyheadtable";
 const { removeStopwords, eng, fra } = require('stopword')
 
 const columns = [
-    {label:'Key word', value: 'keyWord'},
+    {label:'Key word', value: 'keyWord', maxWidth: 170},
     {label:'Frequency', value: 'frequency'},
     {label:'Percentage', value: 'percent'},
 
@@ -42,23 +42,30 @@ const ImgBlankNWhite = (props: Props) =>{
         setData(createdData)
     }
 
+    const onBack = () =>{
+        setResult(undefined)
+      }
 
     return(
         <>
             {
                 result && 
-                    <>
-                        
-                       <p>Total keywords: {total}</p>
-                       {
+                    <div>
+                        <div style={{ marginLeft: '3%', padding: '10px' }}>
+                            <Button onClick={onBack} variant='outlined'>Back</Button>
+                        </div>
+                        <div style={{ display: 'flex', justifyContent: 'center'}}>
+                            <p>Total keywords: {total}</p>
+                        </div>
+                            
                         <div style={{ display: 'flex', justifyContent: 'center'}}>
                             <StickyHeadTable
                                 data={data}
                                 columns={columns}
                             />
                         </div>
-                       }
-                    </>
+                    </div>       
+                       
             }
 
            {!result && <>

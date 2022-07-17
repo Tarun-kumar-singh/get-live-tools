@@ -47,21 +47,19 @@ const Index: NextPage = () => {
     addTagToUrl(router, data.name)
   }
 
-  const onBack = () =>{
-    setSelectedTools(undefined)
-  }
+
 
   return (
     <>
 
       {
         selectedTools && 
-        <>
-          <div style={{ marginLeft: '3%', padding: '10px' }}>
-            <Button onClick={onBack} variant='outlined'>Back</Button>
-          </div>
-          {getToolsComponent(selectedTools)}
-        </>
+          <>    
+             <div style={{ marginLeft: '3%', padding: '10px' }}>
+                  <Button onClick={() => setSelectedTools(undefined)} variant='outlined'>Back</Button>
+              </div>
+            {getToolsComponent(selectedTools)}
+          </>
       }
 
       {!selectedTools && 
