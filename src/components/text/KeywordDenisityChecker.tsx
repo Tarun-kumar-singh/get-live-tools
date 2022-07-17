@@ -1,5 +1,6 @@
 import { Button, OutlinedInput } from "@mui/material";
 import { useState } from "react";
+import CheckDecimal from "../../utils/checkDecimal";
 import StickyHeadTable from "../share/table/stickyheadtable";
 const { removeStopwords, eng, fra } = require('stopword')
 
@@ -30,7 +31,14 @@ const ImgBlankNWhite = (props: Props) =>{
         const count: any = {};
         data.forEach((e: any) => count[e] ? count[e]++ : count[e] = 1);
         setResult({ ...count  })
-        const createdData = Object.keys(count).map((el: any) =>( { keyWord: el, frequency: count[el], percent: ((count[el] * 100) / data.length).toPrecision(2) + '%'  }))
+        const createdData = Object.keys(count).map((el: any) => {
+            const percentValue = (count[el] * 100) / data.length
+            return { 
+                keyWord: el, 
+                frequency: count[el], 
+                percent: (CheckDecimal(percentValue) ? percentValue.toPrecision(2):  percentValue) + '%'  }
+        })
+
         setData(createdData)
     }
 
@@ -40,6 +48,7 @@ const ImgBlankNWhite = (props: Props) =>{
             {
                 result && 
                     <>
+                        
                        <p>Total keywords: {total}</p>
                        {
                         <div style={{ display: 'flex', justifyContent: 'center'}}>

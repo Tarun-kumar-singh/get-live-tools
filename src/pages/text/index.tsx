@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import type { NextPage } from 'next'
 import ToolsCard from '../../components/share/tools-card';
 import Jimp from 'jimp';
@@ -47,12 +47,19 @@ const Index: NextPage = () => {
     addTagToUrl(router, data.name)
   }
 
+  const onBack = () =>{
+    setSelectedTools(undefined)
+  }
+
   return (
     <>
 
       {
         selectedTools && 
         <>
+          <div style={{ marginLeft: '3%', padding: '10px' }}>
+            <Button onClick={onBack} variant='outlined'>Back</Button>
+          </div>
           {getToolsComponent(selectedTools)}
         </>
       }
