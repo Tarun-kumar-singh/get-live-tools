@@ -29,10 +29,17 @@ const Index: NextPage = () => {
     }
   }, [])
 
+  // useEffect(() =>{
+  //   console.log(window.location.href)
+  //   if(!window.location.href.includes('#')){
+  //     setSelectedTools()
+  //   }
+  // }, [window.location.href])
+
   const onToolCardClick = (data: any) =>{
     console.log(data)
     setSelectedTools(data.name)
-    router.replace(router.pathname + '#' + data.name)
+    router.push(router.pathname, router.pathname + '#' + data.name)
   }
 
   return (
