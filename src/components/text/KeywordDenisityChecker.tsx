@@ -16,13 +16,8 @@ const ImgBlankNWhite = (props: Props) =>{
 
     return(
         <>
-        <Box sx={{
-            display: 'flex',
-            justifyContent:'center',
-            flexDirection: 'column',
-            gap: '10px',
-            flexGrow: 1
-        }}>
+        <>
+
            <OutlinedInput 
                 value={value}
                 placeholder="Please enter text"  
@@ -32,14 +27,15 @@ const ImgBlankNWhite = (props: Props) =>{
                     width:{
                         lg: '60%',
                         xs: '90%'
-                    }
+                    },
+                    textAlign: 'center'
                 }}
                 onChange={(e) => setValue(e.target.value) }
             />
-            <div>   
+            <div style={{ textAlign: 'center' }}>   
                 <Button disabled={!(!!value)} onClick={onChceck} variant="contained">Check</Button>
             </div>
-        </Box>
+        </>
         </>
     )
 }

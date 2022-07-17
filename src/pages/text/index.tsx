@@ -51,9 +51,9 @@ const Index: NextPage = () => {
 
       {
         selectedTools && 
-          <Box sx={{ display:'flex', justifyContent:'center', gap: '13px', flexWrap: 'wrap' }}>
+          <>
             {getToolsComponent(selectedTools)}
-          </Box>
+          </>
       }
 
       {!selectedTools && 
