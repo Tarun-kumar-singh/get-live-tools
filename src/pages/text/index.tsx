@@ -7,12 +7,15 @@ import {useRouter} from 'next/router';
 import KeywordDenisityChecker from '../../components/text/KeywordDenisityChecker';
 import { addTagToUrl, getURlTagValue } from '../../hooks/useTagUrl';
 import { TextTools } from '../../constants/tools/texts';
-import StickyHeadTable from '../../components/share/table/stickyheadtable';
+import WordCounter from '../../components/text/WordCounter';
  
 const getToolsComponent = (componentName: string, onBack: () => void) => {
 
   if(componentName === 'KeywordDenisityChecker'){
    return <KeywordDenisityChecker onBack={onBack}/>
+  }
+  else if(componentName === 'WordCounter'){
+    return <WordCounter onBack={onBack}/>
   }
 
 }
@@ -57,12 +60,6 @@ const Index: NextPage = () => {
       {
         selectedTools && 
           <>    
-             {/* <div style={{ marginLeft: '3%', padding: '10px' }}>
-                  <Button onClick={() => {
-                    router.back()
-                    setSelectedTools(undefined)
-                  }} variant='outlined'>Back</Button>
-              </div> */}
             {getToolsComponent(selectedTools, onBack)}
           </>
       }

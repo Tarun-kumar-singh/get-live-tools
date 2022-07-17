@@ -6,5 +6,5 @@ export const TextTools: ToolsType = [
     {label: 'word Counter', name: 'WordCounter'},
     {label: 'Reverse text', name: 'ReverseText'},
     {label: 'Change letter case', name: 'ChangeLetterCase'},
-    {label: 'Abusove word detector', name: 'AbusoveWordDetector'}
+    {label: 'Abusive word detector', name: 'AbusiveWordDetector'}
 ]
