@@ -32,7 +32,7 @@ const Index: NextPage = () => {
   const onToolCardClick = (data: any) =>{
     console.log(data)
     setSelectedTools(data.name)
-    router.push(router.pathname, router.pathname + '#' + data.name)
+    router.push(router.pathname + '#' + data.name)
   }
 
   return (
