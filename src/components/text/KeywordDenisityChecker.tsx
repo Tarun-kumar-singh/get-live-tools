@@ -1,10 +1,16 @@
 import { Button, OutlinedInput, Stack } from "@mui/material";
 import { Box } from "@mui/system";
 import { useEffect, useState } from "react";
+import StickyHeadTable from "../share/table/stickyheadtable";
 // import { removeStopwords, eng, fra } from 'stopword'
-
 const { removeStopwords, eng, fra } = require('stopword')
 
+const columns = [
+    {label:'Key word', value: 'keyWord'},
+    {label:'Frequency', value: 'frequency'},
+    {label:'Percentage', value: 'percent'},
+
+]
 type Props = {
 
 }
@@ -14,22 +20,20 @@ const ImgBlankNWhite = (props: Props) =>{
     const [result, setResult] = useState<any>()
     const [total, setTotal] = useState<number | undefined>()
 
+    const [data, setData] = useState<Array<any>>([])
+
     const onChceck = () => {
-        console.log(value)
-        const newString = removeStopwords(value.split(' '))
-        console.log(getFrequency(newString))
+        const newString = removeStopwords(value.trim().split(' '))
+        getFrequency(newString)
     }
 
     const getFrequency = (data: Array<any>) =>{
-        console.log(data.length)
         setTotal(data.length)
         const count: any = {};
         data.forEach((e: any) => count[e] ? count[e]++ : count[e] = 1);
-        console.log(result)
-        setResult({
-           ...count
-        })
-        return count
+        setResult({ ...count  })
+        const createdData = Object.keys(count).map((el: any) =>( { keyWord: el, frequency: count[el], percent: ((count[el] * 100) / data.length).toPrecision(2) + '%'  }))
+        setData(createdData)
     }
 
 
@@ -38,16 +42,16 @@ const ImgBlankNWhite = (props: Props) =>{
             {
                 result && 
                     <>
-                       <p>Total: {total}</p>
+                       <p>Total keywords: {total}</p>
                        {
-                        Object.keys(result).map((el: any) =>{   
-                           return(<div>
-                                {el} - {result[el]}
-                           </div>) 
-                        })
+                            <StickyHeadTable
+                                data={data}
+                                columns={columns}
+                            />
                        }
                     </>
             }
+
            {!result && <>
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
                         <OutlinedInput 
