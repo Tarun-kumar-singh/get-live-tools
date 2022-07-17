@@ -9,19 +9,15 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 
 
-
-const data = [
-  {id: 11, keyWord: 'India', frequency: 10, percent: 20},
-  {id: 12, keyWord: 'China', frequency: 30, percent: 30},
-];
 type Props = {
-  columns: any
+  columns: Array<any>,
+  data: Array<any>
 }
 export default function StickyHeadTable(props: Props) {
 
-  const { columns } = props
+  const { columns, data } = props
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rowsPerPage, setRowsPerPage] = React.useState(50);
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
