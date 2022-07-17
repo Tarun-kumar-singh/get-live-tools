@@ -6,7 +6,7 @@ import Jimp from 'jimp';
 import { useEffect, useState } from 'react';
 import {useRouter} from 'next/router';
 import ImgBlankNWhite from '../../components/image/ImgBlankNWhite';
-import { addTagToUrl } from '../../hooks/useTagUrl';
+import { addTagToUrl, getURlTagValue } from '../../hooks/useTagUrl';
 
 const getToolsComponent = (componentName: string) => {
 
@@ -21,14 +21,13 @@ const Index: NextPage = () => {
   const router = useRouter()
   
   const [selectedTools, setSelectedTools] = useState<string>()
+  const tagVal = getURlTagValue(router, router.asPath)
 
   useEffect(() =>{
-    const pathUrl = router.asPath
-    const selctedVal = pathUrl.split('#')[1]
-    if(selctedVal) {
-      setSelectedTools(selctedVal)
+    if(tagVal) {
+      setSelectedTools(tagVal)
     }
-  }, [])
+  }, [tagVal])
 
   useEffect(() => {
     router.beforePopState(({ url, as, options }) => {   
@@ -46,7 +45,6 @@ const Index: NextPage = () => {
   const onToolCardClick = (data: any) =>{
     setSelectedTools(data.name)
     addTagToUrl(router, data.name)
-    // router.push(router.pathname + '#' + data.name)
   }
 
   return (
