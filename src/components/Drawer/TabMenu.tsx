@@ -19,6 +19,16 @@ const TabMenu = (props: Props) =>{
      setValue(tabIndex !== -1 ? tabIndex : 0)
     }, [])
 
+    useEffect(() =>{
+      const tabIndexValue = getRouteIndex(router.pathname)
+      setValue(tabIndexValue !== -1 ? tabIndexValue : 0 )
+    }, [router.pathname])
+
+    const getRouteIndex = (route: string): number  =>{
+      const tabIndex =  TabList.findIndex(el => el.route === route)
+      return tabIndex
+    }
+
     const handleChange = (event: React.SyntheticEvent, newValue: number, route: string) => {
       setValue(newValue);
       router.push(route)
