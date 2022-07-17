@@ -42,10 +42,12 @@ const ImgBlankNWhite = (props: Props) =>{
                     <>
                        <p>Total keywords: {total}</p>
                        {
+                        <div style={{ display: 'flex', justifyContent: 'center'}}>
                             <StickyHeadTable
                                 data={data}
                                 columns={columns}
                             />
+                        </div>
                        }
                     </>
             }

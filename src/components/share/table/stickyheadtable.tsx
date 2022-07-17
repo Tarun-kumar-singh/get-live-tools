@@ -61,7 +61,7 @@ export default function StickyHeadTable(props: Props) {
                     {columns.map((column: any, index: number) => {
                       const { value } = column
                       return (
-                        <TableCell key={keyId} align={column.align}>
+                        <TableCell key={value} align={column.align}>
                            {rowData[value]}
                         </TableCell>
                       );
