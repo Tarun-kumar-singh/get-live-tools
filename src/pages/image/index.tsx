@@ -7,8 +7,7 @@ import { useEffect, useState } from 'react';
 import {useRouter} from 'next/router';
 import ImgBlankNWhite from '../../components/image/ImgBlankNWhite';
 import { addTagToUrl, getURlTagValue } from '../../hooks/useTagUrl';
-import getSelectedToolName from '../../utils/getSelectedTools';
-
+ 
 const getToolsComponent = (componentName: string) => {
 
   if(componentName === 'ImageBlackNWhite'){
