@@ -39,9 +39,9 @@ export default function StickyHeadTable(props: Props) {
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
-              {columns.map((column: any) => (
+              {columns.map((column: any, index: number) => (
                 <TableCell
-                  key={column.id}
+                  key={index.toString()}
                   align={column.align}
                   style={{ minWidth: column.minWidth || 20 }}
                 >
@@ -53,14 +53,15 @@ export default function StickyHeadTable(props: Props) {
           <TableBody>
             {data
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row: any) => {
+              .map((row: any, index: number) => {
                 const rowData = row
+                const keyId = index.toString()
                 return (
-                  <TableRow hover key={row.id}>
+                  <TableRow hover key={keyId}>
                     {columns.map((column: any, index: number) => {
                       const { value } = column
                       return (
-                        <TableCell key={row.id} align={column.align}>
+                        <TableCell key={keyId} align={column.align}>
                            {rowData[value]}
                         </TableCell>
                       );

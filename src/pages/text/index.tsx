@@ -17,15 +17,6 @@ const getToolsComponent = (componentName: string) => {
 
 }
 
-const columns: any[] = [
-  { id: 'keyWord', label: 'Key Word', value: 'keyWord', minWidth: '170px' },
-  { id: 'frequency', label: 'Frequency', value: 'frequency' },
-  { id: 'percentageFrequency', label: 'Frequency(%)', value: 'percent' },
-];
-const data = [
-  {id: 11, keyWord: 'India', frequency: 10, percent: 20},
-  {id: 12, keyWord: 'China', frequency: 30, percent: 30},
-];
 const Index: NextPage = () => {
 
   const router = useRouter()
@@ -59,26 +50,14 @@ const Index: NextPage = () => {
   return (
     <>
 
-      <Box sx={{
-        display: 'flex',
-        justifyContent: 'center'
-      }}>
-        <StickyHeadTable
-          columns={columns}
-          data={data}
-        />
-      </Box>
-
-
-
-      {/* {
+      {
         selectedTools && 
         <>
           {getToolsComponent(selectedTools)}
         </>
-      } */}
+      }
 
-      {/* {!selectedTools && 
+      {!selectedTools && 
           <Box sx={{ display:'flex', justifyContent:'center', gap: '13px', flexWrap: 'wrap' }}>
             {
                 TextTools.map((el: any) =>(
@@ -86,7 +65,7 @@ const Index: NextPage = () => {
                 ))
             }
           </Box >
-      } */}
+      }
 
     </>
   )
