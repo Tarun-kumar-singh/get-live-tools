@@ -1,8 +1,6 @@
-import { Button, OutlinedInput, Stack } from "@mui/material";
-import { Box } from "@mui/system";
-import { useEffect, useState } from "react";
+import { Button, OutlinedInput } from "@mui/material";
+import { useState } from "react";
 import StickyHeadTable from "../share/table/stickyheadtable";
-// import { removeStopwords, eng, fra } from 'stopword'
 const { removeStopwords, eng, fra } = require('stopword')
 
 const columns = [
