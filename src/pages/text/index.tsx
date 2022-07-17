@@ -7,6 +7,7 @@ import {useRouter} from 'next/router';
 import KeywordDenisityChecker from '../../components/text/KeywordDenisityChecker';
 import { addTagToUrl, getURlTagValue } from '../../hooks/useTagUrl';
 import { TextTools } from '../../constants/tools/texts';
+import StickyHeadTable from '../../components/share/table/stickyheadtable';
  
 const getToolsComponent = (componentName: string) => {
 
@@ -15,6 +16,12 @@ const getToolsComponent = (componentName: string) => {
   }
 
 }
+
+const columns: readonly any[] = [
+  { id: 'keyWord', label: 'Key Word', value: 'keyWord', minWidth: 170 },
+  { id: 'frequency', label: 'Frequency', value: 'frequency', width: 20 },
+  { id: 'percentageFrequency', label: 'Frequency(%)', value: 'percent', width: 20 },
+];
 
 const Index: NextPage = () => {
 
@@ -49,14 +56,25 @@ const Index: NextPage = () => {
   return (
     <>
 
-      {
+      <Box sx={{
+        display: 'flex',
+        justifyContent: 'center'
+      }}>
+        <StickyHeadTable
+          columns={columns}
+        />
+      </Box>
+
+
+
+      {/* {
         selectedTools && 
         <>
           {getToolsComponent(selectedTools)}
         </>
-      }
+      } */}
 
-      {!selectedTools && 
+      {/* {!selectedTools && 
           <Box sx={{ display:'flex', justifyContent:'center', gap: '13px', flexWrap: 'wrap' }}>
             {
                 TextTools.map((el: any) =>(
@@ -64,7 +82,7 @@ const Index: NextPage = () => {
                 ))
             }
           </Box >
-      }
+      } */}
 
     </>
   )
