@@ -51,9 +51,9 @@ const Index: NextPage = () => {
 
       {
         selectedTools && 
-          <>
-            {getToolsComponent(selectedTools)}
-          </>
+        <>
+          {getToolsComponent(selectedTools)}
+        </>
       }
 
       {!selectedTools && 
