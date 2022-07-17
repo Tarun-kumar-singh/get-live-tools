@@ -29,6 +29,19 @@ const Index: NextPage = () => {
     }
   }, [])
 
+  useEffect(() => {
+    router.beforePopState(({ url, as, options }) => {   
+      if(!url.includes('#')){
+        setSelectedTools('')
+      }
+      else{
+        setSelectedTools(url.split('#')[1])
+      }
+      return true
+    })
+    
+  }, [])
+
   const onToolCardClick = (data: any) =>{
     console.log(data)
     setSelectedTools(data.name)
