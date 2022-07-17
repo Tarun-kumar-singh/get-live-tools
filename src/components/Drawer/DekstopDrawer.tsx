@@ -68,7 +68,7 @@ export default function DekstopDrawer(props: any) {
   const [value, setValue] = React.useState(0);
 
   return (
-      <Box sx={{ display: 'flex' }}>
+      <Box>
         <CssBaseline />
         <AppBar
             position="fixed"
@@ -77,20 +77,12 @@ export default function DekstopDrawer(props: any) {
                 ml: { sm: `${drawerWidth}px` },
                 height: '120px'
             }}
-            // style={{zIndex: 1301}}
         >        
                 <div style={{ marginTop:'10px', display: 'flex', justifyContent: 'center', alignContent: 'center' }}>
                  <Typography variant='subtitle1'>
                   {GlobalConstants.APP_Name}
                  </Typography>
                 </div>
-            {/* <Toolbar> */}
-            {/* <FormControlLabel
-                value="top"
-                control={<Switch color="secondary" />}
-                label=''
-            /> */}
-            {/* </Toolbar> */}
             <TabMenu />
         </AppBar>
         <DrawerHeader />

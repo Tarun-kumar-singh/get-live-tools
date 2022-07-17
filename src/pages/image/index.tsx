@@ -50,24 +50,21 @@ const Index: NextPage = () => {
     <>
 
       {
-        selectedTools && getToolsComponent(selectedTools)
+        selectedTools && 
+          <Box sx={{ display:'flex', justifyContent:'center', gap: '13px', flexWrap: 'wrap' }}>
+            {getToolsComponent(selectedTools)}
+          </Box>
       }
 
-      {!selectedTools && <Box sx={{
-        marginLeft: '20%',
-        marginRight: '20%',
-        marginTop: '50px',
-      }}>
-        <div style={{  display: 'flex', justifyContent: 'center' }}>
-          <div style={{ marginTop: '20px', display: 'flex', flexDirection: 'row', gap: '10px', flexWrap: 'wrap' }}>
+      {!selectedTools && 
+          <Box sx={{ display:'flex', justifyContent:'center', gap: '13px', flexWrap: 'wrap' }}>
             {
                 ImageTools.map((el: any) =>(
                   <ToolsCard onToolCardClick={() => onToolCardClick(el)} key={el.label} title={el.label} />
                 ))
             }
-          </div>
-        </div>
-      </Box>}
+          </Box >
+      }
 
     </>
   )
