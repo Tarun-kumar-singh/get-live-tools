@@ -11,9 +11,11 @@ const columns = [
 
 ]
 type Props = {
-
+    onBack: () => void
 }
 const ImgBlankNWhite = (props: Props) =>{
+
+    const {  onBack } = props
 
     const [value, setValue] = useState('')
     const [result, setResult] = useState<any>()
@@ -42,18 +44,22 @@ const ImgBlankNWhite = (props: Props) =>{
         setData(createdData)
     }
 
-    const onBack = () =>{
-        setResult(undefined)
+    const onClickBack = () =>{
+        if(result){
+            setResult(undefined)
+            return
+        }
+        onBack()
       }
 
     return(
         <>
+            <div style={{ marginLeft: '3%', padding: '10px' }}>
+                <Button onClick={onClickBack} variant='outlined'>Back</Button>
+            </div>
             {
                 result && 
                     <div>
-                        <div style={{ marginLeft: '3%', padding: '10px' }}>
-                            <Button onClick={onBack} variant='outlined'>Back</Button>
-                        </div>
                         <div style={{ display: 'flex', justifyContent: 'center'}}>
                             <p>Total keywords: {total}</p>
                         </div>

@@ -9,10 +9,10 @@ import { addTagToUrl, getURlTagValue } from '../../hooks/useTagUrl';
 import { TextTools } from '../../constants/tools/texts';
 import StickyHeadTable from '../../components/share/table/stickyheadtable';
  
-const getToolsComponent = (componentName: string) => {
+const getToolsComponent = (componentName: string, onBack: () => void) => {
 
   if(componentName === 'KeywordDenisityChecker'){
-   return <KeywordDenisityChecker />
+   return <KeywordDenisityChecker onBack={onBack}/>
   }
 
 }
@@ -47,7 +47,9 @@ const Index: NextPage = () => {
     addTagToUrl(router, data.name)
   }
 
-
+  const onBack = () =>{
+    router.back()
+  }
 
   return (
     <>
@@ -55,10 +57,13 @@ const Index: NextPage = () => {
       {
         selectedTools && 
           <>    
-             <div style={{ marginLeft: '3%', padding: '10px' }}>
-                  <Button onClick={() => setSelectedTools(undefined)} variant='outlined'>Back</Button>
-              </div>
-            {getToolsComponent(selectedTools)}
+             {/* <div style={{ marginLeft: '3%', padding: '10px' }}>
+                  <Button onClick={() => {
+                    router.back()
+                    setSelectedTools(undefined)
+                  }} variant='outlined'>Back</Button>
+              </div> */}
+            {getToolsComponent(selectedTools, onBack)}
           </>
       }
 
