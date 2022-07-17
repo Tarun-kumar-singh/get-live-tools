@@ -11,11 +11,8 @@ type Props = {
 const ImgBlankNWhite = (props: Props) =>{
 
     const [value, setValue] = useState('')
-    const [result, setResult] = useState({} as any)
-    
-    useEffect(() =>{
-        console.log(result)
-    }, [result])
+    const [result, setResult] = useState<any>()
+    const [total, setTotal] = useState<number | undefined>()
 
     const onChceck = () => {
         console.log(value)
@@ -25,15 +22,12 @@ const ImgBlankNWhite = (props: Props) =>{
 
     const getFrequency = (data: Array<any>) =>{
         console.log(data.length)
-        setResult({
-            ...result,
-            total: data.length
-        })
+        setTotal(data.length)
         const count: any = {};
         data.forEach((e: any) => count[e] ? count[e]++ : count[e] = 1);
+        console.log(result)
         setResult({
-            ...result,
-            frequency: count
+           ...count
         })
         return count
     }
@@ -42,12 +36,19 @@ const ImgBlankNWhite = (props: Props) =>{
     return(
         <>
             {
-                result.frequency && 
+                result && 
                     <>
-                       <p>Total: {result.total}</p>
+                       <p>Total: {total}</p>
+                       {
+                        Object.keys(result).map((el: any) =>{   
+                           return(<div>
+                                {el} - {result[el]}
+                           </div>) 
+                        })
+                       }
                     </>
             }
-           {!result.frequency && <>
+           {!result && <>
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
                         <OutlinedInput 
                             value={value}
