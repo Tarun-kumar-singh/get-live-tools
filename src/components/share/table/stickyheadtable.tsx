@@ -9,6 +9,11 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 
 
+// @Doc
+// Add id to the obhect of data array --> used for key
+// Add minWith to object of columns array -> Default will be 20
+// Pagination will be displayed if data size is more than 50
+
 type Props = {
   columns: Array<any>,
   data: Array<any>
@@ -38,9 +43,9 @@ export default function StickyHeadTable(props: Props) {
                 <TableCell
                   key={column.id}
                   align={column.align}
-                  style={{ minWidth: column.minWidth }}
+                  style={{ minWidth: column.minWidth || 20 }}
                 >
-                  {column.label}
+                 <div style={{ fontWeight: 600}}>{column.label}</div> 
                 </TableCell>
               ))}
             </TableRow>
@@ -49,12 +54,10 @@ export default function StickyHeadTable(props: Props) {
             {data
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row: any) => {
-                console.log(row)
                 const rowData = row
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
+                  <TableRow hover key={row.id}>
                     {columns.map((column: any, index: number) => {
-                      console.log(column)
                       const { value } = column
                       return (
                         <TableCell key={row.id} align={column.align}>
@@ -68,15 +71,15 @@ export default function StickyHeadTable(props: Props) {
           </TableBody>
         </Table>
       </TableContainer>
-      {/* <TablePagination
+      {data.length > 50 && <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
-        count={rows.length}
+        count={data.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
-      /> */}
+      />}
     </Paper>
   );
 }

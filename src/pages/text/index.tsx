@@ -18,9 +18,9 @@ const getToolsComponent = (componentName: string) => {
 }
 
 const columns: any[] = [
-  { id: 'keyWord', label: 'Key Word', value: 'keyWord', minWidth: 170 },
-  { id: 'frequency', label: 'Frequency', value: 'frequency', width: 20 },
-  { id: 'percentageFrequency', label: 'Frequency(%)', value: 'percent', width: 20 },
+  { id: 'keyWord', label: 'Key Word', value: 'keyWord', minWidth: '170px' },
+  { id: 'frequency', label: 'Frequency', value: 'frequency' },
+  { id: 'percentageFrequency', label: 'Frequency(%)', value: 'percent' },
 ];
 const data = [
   {id: 11, keyWord: 'India', frequency: 10, percent: 20},
