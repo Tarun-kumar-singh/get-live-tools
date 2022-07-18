@@ -12,6 +12,17 @@ const ReverseString = (props: Props) => {
     const [value, setValue] = useState<string>('')
     const [reverseValue, setReverseValue] = useState<string>('')
 
+    const downloadTxtFile = () => {
+        const element = document.createElement("a");
+        const file = new Blob([reverseValue], {
+          type: "text/plain"
+        });
+        element.href = URL.createObjectURL(file);
+        element.download = "file.txt";
+        document.body.appendChild(element);
+        element.click();
+      };
+
     const onClickBack = () =>{
         onBack()
     }
@@ -57,7 +68,7 @@ const ReverseString = (props: Props) => {
                         <CardActions>
                             <div>
                                 <Button onClick={() => navigator.clipboard.writeText(reverseValue)}>Copy</Button>
-                                <Button>Download</Button>
+                                <Button onClick={() => downloadTxtFile()}>Download</Button>
                             </div>
                         </CardActions>
                     </Card>
