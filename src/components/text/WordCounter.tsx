@@ -31,11 +31,11 @@ const WordCounter = (props: Props) => {
 
     return(
         <>
-            <div style={{ marginLeft: '3%', padding: '10px' }}>
+            <div style={{ marginLeft: '3%' }}>
                 <Button onClick={onClickBack} variant='outlined'>Back</Button>
             </div>
            
-                <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>         
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>         
                     <div>
                         <TableCell variant="head">
                             Total Words:
@@ -52,15 +52,13 @@ const WordCounter = (props: Props) => {
                             {totalCharacters}
                         </TableCell>
                     </div> 
-                </div> 
-
-            {/* <div style={{ display: 'flex', justifyContent: 'center', }}>
+            </div> 
+            <div style={{ display: 'flex', justifyContent: 'center', }}>
                 <MultilineTextFiled 
                     onChange={onChange}
                     value={value}
                 />
-
-            </div> */}
+            </div>
         </>
     )
 
