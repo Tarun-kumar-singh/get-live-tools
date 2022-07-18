@@ -10,11 +10,10 @@ const WordCounter = (props: Props) => {
 
     const { onBack } = props
     const [value, setValue] = useState<string>('')
-    const [totalCount, setTotalcount] = useState()
-    const [totalCharacters, setTotalCharacters] = useState<number>()
+    const [totalCount, setTotalcount] = useState(0)
+    const [totalCharacters, setTotalCharacters] = useState<number>(0)
 
     const onChange = (value: string): void =>{
-        
         setValue(value)
         const stringToken = removeStopwords(value.trim().split(' '))
         console.log(stringToken)
