@@ -1,5 +1,6 @@
-import { Button, Card, CardActions, CardContent, Divider } from "@mui/material"
-import { useState } from "react"
+import { Button, Card, CardActions, CardContent, Divider, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material"
+import { useEffect, useState } from "react"
+import { alternateCase } from "../../utils/string"
 import HeadTitle from "../share/headTitle"
 import MultilineTextFiled from "../share/MultilineTextField"
 
@@ -12,6 +13,25 @@ const ChangeLetterCase = (props: Props) => {
     const { onBack } = props
     const [value, setValue] = useState<string>('')
     const [result, setResult] = useState<string>('')
+    const [selectedCase, setSelectedCase] = useState('')
+
+    useEffect(() =>{
+        console.log(selectedCase)
+        changeCase(value, selectedCase)
+    }, [selectedCase])
+
+    const changeCase = (value: string, selectedCase: string) =>{
+
+        if(selectedCase === 'upper'){
+            setResult(value.toUpperCase())
+        }
+        else if(selectedCase === 'lower'){
+            setResult(value.toLowerCase())
+        }
+        else{
+            setResult(alternateCase(value, true))
+        }
+    }
 
     const downloadTxtFile = () => {
         const element = document.createElement("a");
@@ -30,7 +50,7 @@ const ChangeLetterCase = (props: Props) => {
 
     const onChange = (val: string) =>{
         setValue(val)
-        setResult(val.split('').reverse().join(''))
+        changeCase(val, selectedCase)  
     }
 
     return(
@@ -44,13 +64,26 @@ const ChangeLetterCase = (props: Props) => {
                 />
             </div>
            
-            <div style={{ display: 'flex', justifyContent: 'center', }}>
+            <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
+           <div>
+           <FormControl>
+                <FormLabel>Select case</FormLabel>
+                <RadioGroup
+                    row
+                    onChange={(e) => setSelectedCase(e.target.value)}
+                >
+                    <FormControlLabel value="upper" control={<Radio />} label="Upper case" />
+                    <FormControlLabel value="lower" control={<Radio />} label="Lower case" />
+                    <FormControlLabel value="alternate" control={<Radio />} label="Alternate case" />                   
+                </RadioGroup>
+                </FormControl>
+           </div>
                 <MultilineTextFiled 
                     onChange={onChange}
                     value={value}
                 />
             </div>
-            {result && <div style={{ marginTop: '30px', display:'flex', justifyContent: 'center'  }}>
+            {result && selectedCase && <div style={{ marginTop: '30px', display:'flex', justifyContent: 'center'  }}>
                 <Divider/>
                     <Card 
                         sx={{ 
