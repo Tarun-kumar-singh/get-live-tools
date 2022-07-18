@@ -29,7 +29,7 @@ const ChangeLetterCase = (props: Props) => {
             setResult(value.toLowerCase())
         }
         else{
-            setResult(alternateCase(value, true))
+            setResult(alternateCase(value, selectedCase === 'alternateUpper' ? true : false))
         }
     }
 
@@ -74,7 +74,9 @@ const ChangeLetterCase = (props: Props) => {
                 >
                     <FormControlLabel value="upper" control={<Radio />} label="Upper case" />
                     <FormControlLabel value="lower" control={<Radio />} label="Lower case" />
-                    <FormControlLabel value="alternate" control={<Radio />} label="Alternate case" />                   
+                    <FormControlLabel value="alternateUpper" control={<Radio />} label="Alternate case(Upper first)" />                   
+                    <FormControlLabel value="alternateLower" control={<Radio />} label="Alternate case(Lower first)" />                   
+
                 </RadioGroup>
                 </FormControl>
            </div>
