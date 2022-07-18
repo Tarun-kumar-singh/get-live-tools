@@ -9,6 +9,7 @@ import { addTagToUrl, getURlTagValue } from '../../hooks/useTagUrl';
 import { TextTools } from '../../constants/tools/texts';
 import WordCounter from '../../components/text/WordCounter';
 import ReverseString from '../../components/text/ReverseString';
+import ChangeLetterCase from '../../components/text/ChangeLetterCase';
  
 const getToolsComponent = (componentName: string, onBack: () => void) => {
 
@@ -21,7 +22,10 @@ const getToolsComponent = (componentName: string, onBack: () => void) => {
   else if(componentName === 'ReverseText'){
    return <ReverseString onBack={onBack} />
   }
-
+  else if( componentName === 'ChangeLetterCase'){
+    return <ChangeLetterCase onBack={onBack} />
+  }
+  
 }
 
 const Index: NextPage = () => {
