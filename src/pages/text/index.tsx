@@ -8,14 +8,18 @@ import KeywordDenisityChecker from '../../components/text/KeywordDenisityChecker
 import { addTagToUrl, getURlTagValue } from '../../hooks/useTagUrl';
 import { TextTools } from '../../constants/tools/texts';
 import WordCounter from '../../components/text/WordCounter';
+import ReverseString from '../../components/text/ReverseString';
  
 const getToolsComponent = (componentName: string, onBack: () => void) => {
 
   if(componentName === 'KeywordDenisityChecker'){
-   return <KeywordDenisityChecker onBack={onBack}/>
-  }
+   return <KeywordDenisityChecker onBack={onBack} />
+  } 
   else if(componentName === 'WordCounter'){
-    return <WordCounter onBack={onBack}/>
+    return <WordCounter onBack={onBack} />
+  }
+  else if(componentName === 'ReverseText'){
+   return <ReverseString onBack={onBack} />
   }
 
 }

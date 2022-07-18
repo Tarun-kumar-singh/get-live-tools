@@ -3,7 +3,7 @@ import { Typography } from "@mui/material"
 
 type Props = {
     title: string,
-    caption: string
+    caption?: string
 }
 const HeadTitle = (props: Props) => {
 
@@ -12,7 +12,7 @@ const HeadTitle = (props: Props) => {
     return(
         <div style={{ display: 'flex', flexDirection:'column'}}>
             <Typography variant="h6">{title}</Typography>
-            <Typography variant="caption">({caption})</Typography>
+            {caption && <Typography variant="caption">({caption})</Typography>}
         </div>
     )
 
