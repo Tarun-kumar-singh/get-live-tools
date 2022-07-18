@@ -16,9 +16,7 @@ const WordCounter = (props: Props) => {
 
     const onChange = (value: string): void =>{
         setValue(value)
-       console.log(value)
         const stringToken = removeStopwords(value.trim().split(' '))
-        console.log(stringToken)
         if(stringToken.length === 1 && stringToken[0] === '' ){
             setTotalcount(0)
         }

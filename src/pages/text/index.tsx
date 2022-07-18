@@ -10,6 +10,7 @@ import { TextTools } from '../../constants/tools/texts';
 import WordCounter from '../../components/text/WordCounter';
 import ReverseString from '../../components/text/ReverseString';
 import ChangeLetterCase from '../../components/text/ChangeLetterCase';
+import AbusiveWordDetector from '../../components/text/AbusiveWordDetector';
  
 const getToolsComponent = (componentName: string, onBack: () => void) => {
 
@@ -25,6 +26,10 @@ const getToolsComponent = (componentName: string, onBack: () => void) => {
   else if( componentName === 'ChangeLetterCase'){
     return <ChangeLetterCase onBack={onBack} />
   }
+  else if( componentName === 'AbusiveWordDetector'){
+    return <AbusiveWordDetector onBack={onBack} />
+  }
+  
   
 }
 

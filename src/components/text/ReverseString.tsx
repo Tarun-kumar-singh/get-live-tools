@@ -21,7 +21,7 @@ const ReverseString = (props: Props) => {
         element.download = "file.txt";
         document.body.appendChild(element);
         element.click();
-      };
+    };
 
     const onClickBack = () =>{
         onBack()
