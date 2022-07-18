@@ -1,5 +1,5 @@
-import { Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material";
-import React, { useState } from "react";
+import { Button, Card, CardActions, CardContent, Divider, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import HeadTitle from "../share/headTitle";
 import MultilineTextFiled from "../share/MultilineTextField";
 const Filter = require('bad-words'),
@@ -9,10 +9,27 @@ type Props = {
     onBack: () => void
 }
 const AbusiveWordDetector = (props: Props) => {
-
+    const s = 'asshole shit bulshit sexy'
     const { onBack } = props
+
     const [value, setValue] = useState('')
     const [selectedValue, setSelectedValue] = useState('')
+    const [result, setResult] = useState('')
+
+    useEffect(() =>{
+        console.log(filter.clean("Don't be an ash0le shit")); 
+    }, [])
+
+    const downloadTxtFile = () => {
+        const element = document.createElement("a");
+        const file = new Blob([result], {
+          type: "text/plain"
+        });
+        element.href = URL.createObjectURL(file);
+        element.download = "file.txt";
+        document.body.appendChild(element);
+        element.click();
+    };
 
     const onClickBack = () =>{
         onBack()
@@ -22,13 +39,21 @@ const AbusiveWordDetector = (props: Props) => {
         setValue(val)
     }
 
-    const onClickFind = () => {
-        setValue(value)
-    }
+    const profaneWordsOperations = () => {
+            if(selectedValue === '1'){
+                // list bad words
 
-    const findProfaneWords = (value: string) => {
-
-    }
+            }
+            else if(selectedValue === '2') {
+                // Replace with *
+               setResult(filter.clean(value))
+            }
+            else if(selectedValue === '3') {
+                // Remove bad words
+                // var cFilter = new Filter({ replaceRegex:  /[A-Za-z0-9가-힣_]/g }); 
+                setResult(filter.replace({ options: { placeHolder: '' } }))
+            }
+    }   
 
     return(
         <>
@@ -48,9 +73,9 @@ const AbusiveWordDetector = (props: Props) => {
                             row
                             onChange={(e) => setSelectedValue(e.target.value)}
                         >
-                            <FormControlLabel value="upper" control={<Radio />} label="find bad words" />
-                            <FormControlLabel value="lower" control={<Radio />} label="Replace bad words with *" />
-                            <FormControlLabel value="alternateUpper" control={<Radio />} label="Remove bad word" />                   
+                            <FormControlLabel value="1" control={<Radio />} label="find bad words" />
+                            <FormControlLabel value="2" control={<Radio />} label="Replace bad words with *" />
+                            <FormControlLabel value="3" control={<Radio />} label="Remove bad word" />                   
                         </RadioGroup>
                 </FormControl>
                 <MultilineTextFiled 
@@ -61,13 +86,35 @@ const AbusiveWordDetector = (props: Props) => {
                 <Button 
                     disabled={!value || !selectedValue} 
                     variant="contained" 
-                    onClick={() => onClickFind()}
+                    onClick={() => profaneWordsOperations()}
                 >
                     Find
                 </Button>
-
             </div>
-        
+            {result &&  <div style={{ marginTop: '30px', display:'flex', justifyContent: 'center'  }}>
+                <Divider/>
+                    <Card 
+                        sx={{ 
+                            zIndex: 100, 
+                            height: 'auto',
+                            width:{
+                                lg: '60%',
+                                xs: '90%'
+                            },
+                            textAlign: 'center'
+                        }}
+                    >
+                        <CardContent>
+                            {result}
+                        </CardContent>
+                        <CardActions>
+                            <div>
+                                <Button onClick={() => navigator.clipboard.writeText(result)}>Copy</Button>
+                                <Button onClick={() => downloadTxtFile()}>Download</Button>
+                            </div>
+                        </CardActions>
+                    </Card>
+            </div>}
         </>
     )
 
