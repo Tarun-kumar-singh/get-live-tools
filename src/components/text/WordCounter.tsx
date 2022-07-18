@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, TableCell } from "@mui/material";
 import { useState } from "react";
 import MultilineTextFiled from "../share/MultilineTextField";
 const { removeStopwords, eng, fra } = require('stopword')
@@ -34,19 +34,33 @@ const WordCounter = (props: Props) => {
             <div style={{ marginLeft: '3%', padding: '10px' }}>
                 <Button onClick={onClickBack} variant='outlined'>Back</Button>
             </div>
-           <div>
-              <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
-               <div> Total Words:{totalCount}</div> 
-               <div> Total Characters:{totalCharacters}</div> 
-            </div>  
-            <div style={{ display: 'flex', justifyContent: 'center', }}>
+           
+                <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>         
+                    <div>
+                        <TableCell variant="head">
+                            Total Words:
+                        </TableCell>
+                        <TableCell>
+                            {totalCount}
+                        </TableCell>
+                    </div> 
+                    <div>
+                        <TableCell variant="head">
+                            Total Characters:
+                        </TableCell>
+                        <TableCell>
+                            {totalCharacters}
+                        </TableCell>
+                    </div> 
+                </div> 
+
+            {/* <div style={{ display: 'flex', justifyContent: 'center', }}>
                 <MultilineTextFiled 
                     onChange={onChange}
                     value={value}
                 />
 
-            </div>
-           </div>
+            </div> */}
         </>
     )
 
