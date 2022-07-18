@@ -1,4 +1,7 @@
-import { Button, Card, CardActions, CardContent, Divider, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, Snackbar } from "@mui/material";
+import {
+    Button, Card, CardActions, CardContent, Divider, FormControl, 
+    FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material";
+import Snackbar, { SnackbarOrigin } from '@mui/material/Snackbar';
 import React, { useState } from "react";
 import HeadTitle from "../share/headTitle";
 import MultilineTextFiled from "../share/MultilineTextField";
@@ -42,7 +45,7 @@ const AbusiveWordDetector = (props: Props) => {
             if(selectedValue === '1'){
                 // list bad words
                 const wordTokenProfanewords = value.split(' ').filter(el => filter.isProfane(el))
-                if(wordTokenProfanewords.length === 0) setSnackBarMessage('No Bad words')
+                if(wordTokenProfanewords.length === 0) setSnackBarMessage('No Bad word found')
                 console.log(wordTokenProfanewords)
                 setResult(wordTokenProfanewords.join(','))
             }
@@ -50,7 +53,7 @@ const AbusiveWordDetector = (props: Props) => {
                 // Replace with *
                 const cleaned = filter.clean(value)
                 if(!cleaned.includes('**')){
-                    setSnackBarMessage('No bad words found')
+                    setSnackBarMessage('No bad word found')
                     return
                 } 
                 setResult(cleaned)
@@ -69,14 +72,19 @@ const AbusiveWordDetector = (props: Props) => {
 
     return(
         <>
-            {/* {snackBarMessage &&  */}
+            {snackBarMessage && 
                 <Snackbar
-                    anchorOrigin={{ vertical:'bottom', horizontal: 'right' }}
+                    open={!!snackBarMessage}
+                        anchorOrigin={{ 
+                            vertical: 'top',
+                            horizontal: 'right',
+                        }}
                     message={snackBarMessage}
                     autoHideDuration={4000}
-                    // onClose={() => setSnackBarMessage('')}
+                    onClose={() => setSnackBarMessage('')}
                 />
-            {/* } */}
+                
+            }
 
              <div style={{ marginLeft: '3%' }}>
                 <Button onClick={onClickBack} variant='outlined'>Back</Button>
