@@ -1,5 +1,5 @@
-import { Button, Card, CardActions, CardContent, Divider, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { Button, Card, CardActions, CardContent, Divider, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, Snackbar } from "@mui/material";
+import React, { useState } from "react";
 import HeadTitle from "../share/headTitle";
 import MultilineTextFiled from "../share/MultilineTextField";
 const Filter = require('bad-words'),
@@ -9,17 +9,14 @@ type Props = {
     onBack: () => void
 }
 const AbusiveWordDetector = (props: Props) => {
-    const s = 'asshole shit bulshit sexy'
     const { onBack } = props
 
     const [value, setValue] = useState('')
     const [selectedValue, setSelectedValue] = useState('')
     const [result, setResult] = useState('')
 
-    useEffect(() =>{
-        const cleanWords = "Don't be an ash0le shit".split(' ').filter((el) => !filter.isProfane(el))
-        console.log(cleanWords); 
-    }, [])
+    const [snackBarMessage, setSnackBarMessage] = useState('')
+
 
     const downloadTxtFile = () => {
         const element = document.createElement("a");
@@ -41,24 +38,46 @@ const AbusiveWordDetector = (props: Props) => {
     }
 
     const profaneWordsOperations = () => {
+           setResult('')
             if(selectedValue === '1'){
                 // list bad words
-                const wordTokenprofanewords = value.split(' ').filter(el => filter.isProfane(el))
-                
+                const wordTokenProfanewords = value.split(' ').filter(el => filter.isProfane(el))
+                if(wordTokenProfanewords.length === 0) setSnackBarMessage('No Bad words')
+                console.log(wordTokenProfanewords)
+                setResult(wordTokenProfanewords.join(','))
             }
             else if(selectedValue === '2') {
                 // Replace with *
-               setResult(filter.clean(value))
+                const cleaned = filter.clean(value)
+                if(!cleaned.includes('**')){
+                    setSnackBarMessage('No bad words found')
+                    return
+                } 
+                setResult(cleaned)
             }
             else if(selectedValue === '3') {
                 // Remove bad words
                 const cleanWords = value.split(' ').filter((el) => !filter.isProfane(el))
+                console.log(cleanWords)
+                if(cleanWords.join(' ').length === value.length){
+                    setSnackBarMessage('No bad word found')
+                    return  
+                } 
                 setResult(filter.clean(cleanWords.join(' ')))
             }
     }   
 
     return(
         <>
+            {/* {snackBarMessage &&  */}
+                <Snackbar
+                    anchorOrigin={{ vertical:'bottom', horizontal: 'right' }}
+                    message={snackBarMessage}
+                    autoHideDuration={4000}
+                    // onClose={() => setSnackBarMessage('')}
+                />
+            {/* } */}
+
              <div style={{ marginLeft: '3%' }}>
                 <Button onClick={onClickBack} variant='outlined'>Back</Button>
             </div>
