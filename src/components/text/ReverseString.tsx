@@ -43,7 +43,7 @@ const ReverseString = (props: Props) => {
                     <Card 
                         sx={{ 
                             zIndex: 100, 
-                            minHeight: '400px',
+                            height: 'auto',
                             width:{
                                 lg: '60%',
                                 xs: '90%'
@@ -56,7 +56,7 @@ const ReverseString = (props: Props) => {
                         </CardContent>
                         <CardActions>
                             <div>
-                                <Button>Copy</Button>
+                                <Button onClick={() => navigator.clipboard.writeText(reverseValue)}>Copy</Button>
                                 <Button>Download</Button>
                             </div>
                         </CardActions>
