@@ -17,7 +17,8 @@ const AbusiveWordDetector = (props: Props) => {
     const [result, setResult] = useState('')
 
     useEffect(() =>{
-        console.log(filter.clean("Don't be an ash0le shit")); 
+        const cleanWords = "Don't be an ash0le shit".split(' ').filter((el) => !filter.isProfane(el))
+        console.log(cleanWords); 
     }, [])
 
     const downloadTxtFile = () => {
@@ -42,7 +43,8 @@ const AbusiveWordDetector = (props: Props) => {
     const profaneWordsOperations = () => {
             if(selectedValue === '1'){
                 // list bad words
-
+                const wordTokenprofanewords = value.split(' ').filter(el => filter.isProfane(el))
+                
             }
             else if(selectedValue === '2') {
                 // Replace with *
@@ -50,8 +52,8 @@ const AbusiveWordDetector = (props: Props) => {
             }
             else if(selectedValue === '3') {
                 // Remove bad words
-                // var cFilter = new Filter({ replaceRegex:  /[A-Za-z0-9가-힣_]/g }); 
-                setResult(filter.replace({ options: { placeHolder: '' } }))
+                const cleanWords = value.split(' ').filter((el) => !filter.isProfane(el))
+                setResult(filter.clean(cleanWords.join(' ')))
             }
     }   
 
