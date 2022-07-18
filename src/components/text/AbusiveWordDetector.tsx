@@ -2,6 +2,8 @@ import { Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } f
 import React, { useState } from "react";
 import HeadTitle from "../share/headTitle";
 import MultilineTextFiled from "../share/MultilineTextField";
+const Filter = require('bad-words'),
+    filter = new Filter();
 
 type Props = {
     onBack: () => void
@@ -22,6 +24,10 @@ const AbusiveWordDetector = (props: Props) => {
 
     const onClickFind = () => {
         setValue(value)
+    }
+
+    const findProfaneWords = (value: string) => {
+
     }
 
     return(
