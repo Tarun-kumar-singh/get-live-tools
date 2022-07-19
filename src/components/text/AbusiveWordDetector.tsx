@@ -2,7 +2,7 @@ import {
     Button, Card, CardActions, CardContent, Divider, FormControl, 
     FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material";
 import Snackbar, { SnackbarOrigin } from '@mui/material/Snackbar';
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import HeadTitle from "../share/headTitle";
 import MultilineTextFiled from "../share/MultilineTextField";
 const Filter = require('bad-words'),
@@ -19,6 +19,14 @@ const AbusiveWordDetector = (props: Props) => {
     const [result, setResult] = useState('')
 
     const [snackBarMessage, setSnackBarMessage] = useState('')
+
+    useEffect(() =>{
+        window.scrollBy({
+            top: window.innerHeight,
+            behavior: 'smooth'
+          })
+    }, [result])
+
 
 
     const downloadTxtFile = () => {
@@ -43,6 +51,7 @@ const AbusiveWordDetector = (props: Props) => {
     const profaneWordsOperations = () => {
            setResult('')
             if(selectedValue === '1'){
+               
                 // list bad words
                 const wordTokenProfanewords = value.split(' ').filter(el => filter.isProfane(el))
                 if(wordTokenProfanewords.length === 0) setSnackBarMessage('No Bad word found')
