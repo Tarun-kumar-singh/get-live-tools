@@ -150,7 +150,8 @@ const AbusiveWordDetector = (props: Props) => {
                                 lg: '60%',
                                 xs: '90%'
                             },
-                            textAlign: 'center'
+                            textAlign: 'center',
+                            marginBottom: '50px'
                         }}
                     >
                         <CardContent>
