@@ -1,4 +1,5 @@
 import {
+    Alert,
     Button, Card, CardActions, CardContent, Divider, FormControl, 
     FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material";
 import Snackbar, { SnackbarOrigin } from '@mui/material/Snackbar';
@@ -19,6 +20,8 @@ const AbusiveWordDetector = (props: Props) => {
     const [result, setResult] = useState('')
 
     const [snackBarMessage, setSnackBarMessage] = useState('')
+    const [alertMessage, setAlertMessage] = useState('')
+    const [displayAlert, setDisplayAlert] = useState<boolean>(false)
 
     useEffect(() =>{
         window.scrollBy({
@@ -26,7 +29,6 @@ const AbusiveWordDetector = (props: Props) => {
             behavior: 'smooth'
           })
     }, [result])
-
 
 
     const downloadTxtFile = () => {
@@ -45,16 +47,22 @@ const AbusiveWordDetector = (props: Props) => {
     }
 
     const onChange = (val: string) =>{
+        setAlert('', false)
         setValue(val)
     }
 
     const profaneWordsOperations = () => {
            setResult('')
+           setDisplayAlert(false)
+           setAlertMessage('')
+
             if(selectedValue === '1'){
                
                 // list bad words
                 const wordTokenProfanewords = value.split(' ').filter(el => filter.isProfane(el))
-                if(wordTokenProfanewords.length === 0) setSnackBarMessage('No Bad word found')
+                if(wordTokenProfanewords.length === 0){
+                    setAlert('No Bad word found', true)
+                }
                 console.log(wordTokenProfanewords)
                 setResult(wordTokenProfanewords.join(','))
             }
@@ -62,7 +70,7 @@ const AbusiveWordDetector = (props: Props) => {
                 // Replace with *
                 const cleaned = filter.clean(value)
                 if(!cleaned.includes('**')){
-                    setSnackBarMessage('No bad word found')
+                    setAlert('No Bad word found', true)
                     return
                 } 
                 setResult(cleaned)
@@ -72,30 +80,22 @@ const AbusiveWordDetector = (props: Props) => {
                 const cleanWords = value.split(' ').filter((el) => !filter.isProfane(el))
                 console.log(cleanWords)
                 if(cleanWords.join(' ').length === value.length){
-                    setSnackBarMessage('No bad word found')
+                    setAlert('No Bad word found', true)
                     return  
                 } 
                 setResult(filter.clean(cleanWords.join(' ')))
             }
-    }   
+    } 
+    
+    const setAlert = (message: string, display?: boolean) =>{
+        setAlertMessage(message)
+        setDisplayAlert(display || false)
+    }
 
     return(
         <>
-            {snackBarMessage && 
-                <Snackbar
-                    open={!!snackBarMessage}
-                        anchorOrigin={{ 
-                            vertical: 'top',
-                            horizontal: 'right',
-                        }}
-                    message={snackBarMessage}
-                    autoHideDuration={4000}
-                    onClose={() => setSnackBarMessage('')}
-                />
-                
-            }
-
-             <div style={{ marginLeft: '3%' }}>
+            
+            <div style={{ marginLeft: '3%' }}>
                 <Button onClick={onClickBack} variant='outlined'>Back</Button>
             </div>
             <div style={{ display: 'flex', justifyContent:'center'}}>
@@ -109,7 +109,10 @@ const AbusiveWordDetector = (props: Props) => {
                     <FormLabel>Select case</FormLabel>
                         <RadioGroup
                             row
-                            onChange={(e) => setSelectedValue(e.target.value)}
+                            onChange={(e) =>{
+                                setAlert('', false)
+                                setSelectedValue(e.target.value)}
+                            }
                         >
                             <FormControlLabel value="1" control={<Radio />} label="Find bad words" />
                             <FormControlLabel value="2" control={<Radio />} label="Replace bad words with *" />
@@ -129,6 +132,14 @@ const AbusiveWordDetector = (props: Props) => {
                     Find
                 </Button>
             </div>
+            {
+                displayAlert &&
+                <div style={{ display: 'flex', justifyContent: 'center'}}>
+                    <Alert style={{ width: '300px' }} icon={false} severity="success">
+                        {alertMessage}
+                </Alert>
+                </div>
+            }
             {result &&  <div style={{ marginTop: '30px', display:'flex', justifyContent: 'center'  }}>
                 <Divider/>
                     <Card 
