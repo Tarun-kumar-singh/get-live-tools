@@ -102,7 +102,7 @@ const AbusiveWordDetector = (props: Props) => {
                             row
                             onChange={(e) => setSelectedValue(e.target.value)}
                         >
-                            <FormControlLabel value="1" control={<Radio />} label="find bad words" />
+                            <FormControlLabel value="1" control={<Radio />} label="Find bad words" />
                             <FormControlLabel value="2" control={<Radio />} label="Replace bad words with *" />
                             <FormControlLabel value="3" control={<Radio />} label="Remove bad word" />                   
                         </RadioGroup>
