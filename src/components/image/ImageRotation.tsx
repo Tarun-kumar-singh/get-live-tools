@@ -16,12 +16,14 @@ const ImageRotation = (props: Props) =>{
 
     const [displayLoader, setDisplayLoader] = useState(false)
     const [changeValue, setChangeValue] = useState()
+    const [changeValUnitMsg, setChangeValUnitMsg] = useState('Rotation value(in deg):')
 
     const onClickBack = () =>{
         onBack()
     }
 
     const onChangeBlurValue = (e: any, value: any) =>{
+        setChangeValue(value)
         makeBlur(URL.createObjectURL(selectedFile as Blob), value)
     }
 
@@ -89,11 +91,11 @@ const ImageRotation = (props: Props) =>{
          
             <div style={{ display: 'flex', justifyContent: 'center', marginTop:'10px', flexDirection: 'column', alignItems: 'center', gap: '20px' }}> 
                 {previewImage && <div style={{ marginTop: '-50px' }}>
-                    <Button onClick={reset} variant="text">Upload another image</Button> 
+                    <Button disabled={displayLoader} onClick={reset} variant="text">Upload another image</Button> 
                 </div>}
                 <div style={{ display:'flex', justifyContent:'center', alignItems:'center', width: '200px', height: '250px', border: '2px black', borderStyle: 'dotted'}}>
                     {!previewImage ? 
-                        <Button disabled={displayLoader} variant="contained" component="label">
+                        <Button variant="contained" component="label">
                                 Upload image
                             <input hidden onChange={onSelectFile} accept="image/*" multiple type="file" />
                         </Button> : 
@@ -125,8 +127,8 @@ const ImageRotation = (props: Props) =>{
            
             <>
                 {previewImage &&
-                <>
-                    <p>Rotation value(in deg)</p> 
+                <>  
+                    <p>{changeValUnitMsg} {changeValue}</p> 
                     <Slider
                         size="small"
                         defaultValue={0}
@@ -147,7 +149,9 @@ const ImageRotation = (props: Props) =>{
                 }
 
             {previewImage && <div style={{ marginTop: '3%' }}>
-                <Button onClick={() => downloadImageFromBase64(previewImage)} variant='outlined'>Download</Button>
+                <Button onClick={() => downloadImageFromBase64(previewImage)} variant='outlined'>
+                    Download
+                </Button>
             </div>}
 
             </> 
