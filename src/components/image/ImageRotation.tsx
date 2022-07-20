@@ -95,8 +95,8 @@ const ImageRotation = (props: Props) =>{
                 </div>}
                 <div style={{ display:'flex', justifyContent:'center', alignItems:'center', width: '200px', height: '250px', border: '2px black', borderStyle: 'dotted'}}>
                     {!previewImage ? 
-                        <Button variant="contained" component="label">
-                                Upload image
+                        <Button disabled={displayLoader} variant="contained" component="label">
+                                {displayLoader ? 'Uploading...' : 'Upload image'}
                             <input hidden onChange={onSelectFile} accept="image/*" multiple type="file" />
                         </Button> : 
                         <>
