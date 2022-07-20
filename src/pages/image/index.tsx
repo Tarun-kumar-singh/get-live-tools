@@ -7,12 +7,17 @@ import { useEffect, useState } from 'react';
 import {useRouter} from 'next/router';
 import ImgBlankNWhite from '../../components/image/ImgBlankNWhite';
 import { addTagToUrl, getURlTagValue } from '../../hooks/useTagUrl';
+import ImageBlur from '../../components/image/ImageBlur';
  
-const getToolsComponent = (componentName: string) => {
+const getToolsComponent = (componentName: string, onBack: () => void) => {
 
   if(componentName === 'ImageBlackNWhite'){
    return <ImgBlankNWhite />
   }
+
+  if(componentName === 'ImageBlur'){
+    return <ImageBlur onBack={onBack} />
+   }
 
 }
 
@@ -46,13 +51,17 @@ const Index: NextPage = () => {
     addTagToUrl(router, data.name)
   }
 
+  const onBack = () =>{
+    router.back()
+  }
+
   return (
     <>
 
       {
         selectedTools && 
           <>
-            {getToolsComponent(selectedTools)}
+            {getToolsComponent(selectedTools, onBack)}
           </>
       }
 
