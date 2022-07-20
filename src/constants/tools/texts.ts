@@ -7,6 +7,6 @@ export const TextTools: ToolsType = [
     {label: 'Reverse text', name: 'ReverseText'},
     {label: 'Change letter case', name: 'ChangeLetterCase'},
     {label: 'Abusive word detector', name: 'AbusiveWordDetector'},
-    {label: 'Write text to pdf', name: 'WriteTextToPDF'}
+    // {label: 'Write text to pdf', name: 'WriteTextToPDF'}
 
 ]
