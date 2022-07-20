@@ -10,7 +10,7 @@ const ImgeBlur = (props: Props) =>{
 
     const { onBack } = props
     const [selectedFile, setSelectedFile] = useState()
-    const [previewImage, setPreviewImage] = useState<any>()
+    const [previewImage, setPreviewImage] = useState<string | undefined>()
 
     const onClickBack = () =>{
         onBack()
@@ -24,23 +24,19 @@ const ImgeBlur = (props: Props) =>{
         }
         
         setSelectedFile(e.target.files[0])
-        const imageURL = URL.createObjectURL(e.target.files[0])
-        setPreviewImage(imageURL);
-
-      const image = await Jimp.read(imageURL);
-       const x = image.blur(50);
-
-        console.log(image)
-        console.log(x.getBase64(Jimp.MIME_JPEG, (err, src) =>{
-            console.log(src)
-            setPreviewImage(src)
-            console.log(err)
-        }))
+        const selectedImageURL = URL.createObjectURL(e.target.files[0])
+        makeBlur(selectedImageURL, 50)
  
     }
 
-    const makeBlur = () =>{
-
+    const makeBlur = async(imageURL: string, bluredValue: number) =>{
+        const image = await Jimp.read(imageURL);
+        const bluredImage = image.blur(bluredValue);
+ 
+        bluredImage.getBase64(Jimp.MIME_JPEG, (err, src) =>{
+            console.log(src)
+            setPreviewImage(src)
+        })
     }
     
     return(
