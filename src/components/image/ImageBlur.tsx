@@ -21,7 +21,6 @@ const ImgeBlur = (props: Props) =>{
             setSelectedFile(undefined)
             return
         }
-console.log(e.target.files[0])
         // I've kept this example simple by using the first image instead of multiple
         setSelectedFile(e.target.files[0])
 
