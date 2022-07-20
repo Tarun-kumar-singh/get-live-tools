@@ -2,6 +2,7 @@ import { Box, Button, Slider } from "@mui/material"
 import { useEffect, useState } from "react"
 import Image from 'next/image'
 import Jimp from 'jimp';
+import AppLoader from "../share/appLoader";
 
 type Props = {
     onBack: () => void
@@ -13,6 +14,9 @@ const ImageRotation = (props: Props) =>{
     const [previewImage, setPreviewImage] = useState<string>('')
     const [selectedImageBase64, setSelectedImageBase64] = useState<string>('')
 
+    const [displayLoader, setDisplayLoader] = useState(false)
+    const [changeValue, setChangeValue] = useState()
+
     const onClickBack = () =>{
         onBack()
     }
@@ -22,9 +26,10 @@ const ImageRotation = (props: Props) =>{
     }
 
     const onSelectFile = async(e: any) => {
-       
+        setDisplayLoader(true)
         if (!e.target.files || e.target.files.length === 0) {
             setSelectedFile(undefined)
+            setDisplayLoader(false)
             return
         }
         
@@ -32,17 +37,18 @@ const ImageRotation = (props: Props) =>{
         const selectedImageURL = URL.createObjectURL(e.target.files[0])
        
         ;(await Jimp.read(selectedImageURL)).getBase64(Jimp.MIME_JPEG, (err, src) =>{
-            console.log(src)
             setSelectedImageBase64(src)
             setPreviewImage(src)
         })
+        setDisplayLoader(false)
  
     }
 
     const makeBlur = async(imageURL: string, bluredValue: number) =>{
-        
+        setDisplayLoader(true)
         if(bluredValue === 0){
             setPreviewImage(selectedImageBase64)
+            setDisplayLoader(false)
             return
         }
 
@@ -52,6 +58,8 @@ const ImageRotation = (props: Props) =>{
         bluredImage.getBase64(Jimp.MIME_JPEG, (err, src) =>{
             setPreviewImage(src)
         })
+        setDisplayLoader(false)
+
     }
     
     const downloadImageFromBase64 = (base64Data: string) =>{
@@ -69,6 +77,10 @@ const ImageRotation = (props: Props) =>{
 
     }
 
+    const onChangeContinueBlurValue = (e: any) =>{
+
+    }
+
     return(
         <>
             <div style={{ marginLeft: '3%' }}>
@@ -77,20 +89,26 @@ const ImageRotation = (props: Props) =>{
          
             <div style={{ display: 'flex', justifyContent: 'center', marginTop:'10px', flexDirection: 'column', alignItems: 'center', gap: '20px' }}> 
                 {previewImage && <div style={{ marginTop: '-50px' }}>
-                    <Button onClick={reset} variant="text">Upload another image</Button>
+                    <Button onClick={reset} variant="text">Upload another image</Button> 
                 </div>}
                 <div style={{ display:'flex', justifyContent:'center', alignItems:'center', width: '200px', height: '250px', border: '2px black', borderStyle: 'dotted'}}>
                     {!previewImage ? 
-                        <Button variant="contained" component="label">
-                            Upload image
+                        <Button disabled={displayLoader} variant="contained" component="label">
+                                Upload image
                             <input hidden onChange={onSelectFile} accept="image/*" multiple type="file" />
                         </Button> : 
+                        <>
                         <Image
                             src={previewImage}
                             alt="Picture of the author"
                             width={200}
                             height={250}
                         />
+                        <div style={{ position:'absolute'}}>
+                            {displayLoader && <AppLoader />}
+                        </div>
+
+                        </>
                     }  
                 </div>
             </div>
@@ -116,7 +134,7 @@ const ImageRotation = (props: Props) =>{
                         max={360}
                         aria-label="Small"
                         valueLabelDisplay="auto"
-                        // onChange={onChangeBlurValue}
+                        onChange={onChangeContinueBlurValue}
                         sx={{
                             width: {
                                 lg: '40%',
