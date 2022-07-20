@@ -11,6 +11,7 @@ const ImgeBlur = (props: Props) =>{
     const { onBack } = props
     const [selectedFile, setSelectedFile] = useState<Blob | MediaSource | undefined>()
     const [previewImage, setPreviewImage] = useState<string>('')
+    const [selectedImageBase64, setSelectedImageBase64] = useState<string>('')
 
     const onClickBack = () =>{
         onBack()
@@ -30,11 +31,22 @@ const ImgeBlur = (props: Props) =>{
         
         setSelectedFile(e.target.files[0])
         const selectedImageURL = URL.createObjectURL(e.target.files[0])
-        // makeBlur(selectedImageURL, 100)
+       
+        ;(await Jimp.read(selectedImageURL)).getBase64(Jimp.MIME_JPEG, (err, src) =>{
+            console.log(src)
+            setSelectedImageBase64(src)
+            setPreviewImage(src)
+        })
  
     }
 
     const makeBlur = async(imageURL: string, bluredValue: number) =>{
+        
+        if(bluredValue === 0){
+            setPreviewImage(selectedImageBase64)
+            return
+        }
+
         const image = await Jimp.read(imageURL);
         const bluredImage = image.blur(bluredValue);
  
@@ -88,7 +100,8 @@ const ImgeBlur = (props: Props) =>{
             <>
                 <Slider
                     size="small"
-                    defaultValue={70}
+                    defaultValue={0}
+                    min={0}
                     aria-label="Small"
                     valueLabelDisplay="auto"
                     onChange={onChangeBlurValue}
