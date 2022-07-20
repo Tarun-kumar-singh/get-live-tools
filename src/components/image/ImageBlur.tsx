@@ -55,7 +55,6 @@ const ImgeBlur = (props: Props) =>{
         })
     }
     
-
     const downloadImageFromBase64 = (base64Data: string) =>{
         var a = document.createElement("a"); //Create <a>
         a.href = base64Data; //Image Base64 Goes here
@@ -64,13 +63,23 @@ const ImgeBlur = (props: Props) =>{
     
     }
 
+    const reset = () =>{
+        setSelectedFile(undefined)
+        setPreviewImage('')
+        setSelectedImageBase64('')
+
+    }
+
     return(
         <>
             <div style={{ marginLeft: '3%' }}>
                 <Button onClick={onClickBack} variant='outlined'>Back</Button>
             </div>
          
-            <div style={{ display: 'flex', justifyContent: 'center', marginTop:'10px' }}> 
+            <div style={{ display: 'flex', justifyContent: 'center', marginTop:'10px', flexDirection: 'column', alignItems: 'center', gap: '20px' }}> 
+                {previewImage && <div style={{ marginTop: '-50px' }}>
+                    <Button onClick={reset} variant="text">Upload another image</Button>
+                </div>}
                 <div style={{ display:'flex', justifyContent:'center', alignItems:'center', width: '200px', height: '250px', border: '2px black', borderStyle: 'dotted'}}>
                     {!previewImage ? 
                         <Button variant="contained" component="label">
