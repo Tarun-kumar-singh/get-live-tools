@@ -18,7 +18,6 @@ const ImgeBlur = (props: Props) =>{
     }
 
     const onChangeBlurValue = (e: any) =>{
-        console.log(e.target.value)
         makeBlur(URL.createObjectURL(selectedFile as Blob), e.target.value)
     }
 
