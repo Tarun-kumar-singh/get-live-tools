@@ -87,18 +87,18 @@ const ImgeBlur = (props: Props) =>{
                 </div>
             </div>
 
-            {previewImage && <div style={{ marginLeft: '3%' }}>
-                <Button onClick={() => downloadImageFromBase64(previewImage)} variant='outlined'>Download</Button>
-            </div>}
+        
             <Box
                 sx={{
                     display: 'flex',
                     justifyContent:'center', 
+                    flexDirection:'column',
+                    alignItems:'center'
                 }}
             >
            
             <>
-                <Slider
+                {previewImage && <Slider
                     size="small"
                     defaultValue={0}
                     min={0}
@@ -111,7 +111,12 @@ const ImgeBlur = (props: Props) =>{
                             xs: '80%'
                         }
                     }}
-                />
+                />}
+
+            {previewImage && <div style={{ marginTop: '3%' }}>
+                <Button onClick={() => downloadImageFromBase64(previewImage)} variant='outlined'>Download</Button>
+            </div>}
+
             </> 
 
             </Box>
