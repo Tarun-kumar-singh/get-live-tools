@@ -1,7 +1,6 @@
 import { Button } from "@mui/material"
 import { useState } from "react"
 import Image from 'next/image'
-import imageToBase64 from 'image-to-base64/browser';
 
 type Props = {
     onBack: () => void
@@ -23,13 +22,6 @@ const ImgeBlur = (props: Props) =>{
         }
         
         setSelectedFile(e.target.files[0])
-        imageToBase64(URL.createObjectURL(e.target.files[0])) 
-            .then(
-                (response: any) => {
-                    console.log(response); 
-                }
-            )
-    
         setPreviewImage(URL.createObjectURL(e.target.files[0]));
 
     }
