@@ -17,7 +17,7 @@ const ImageRotation = (props: Props) =>{
         onBack()
     }
 
-    const onChangeBlurValue = (value: any) =>{
+    const onChangeBlurValue = (e: any, value: any) =>{
         makeBlur(URL.createObjectURL(selectedFile as Blob), value)
     }
 
@@ -123,9 +123,7 @@ const ImageRotation = (props: Props) =>{
                                 xs: '80%'
                             }
                         }}
-                        onChangeCommitted={(e: any, val: number) =>{
-                            onChangeBlurValue(val)
-                        } }
+                        onChangeCommitted={onChangeBlurValue}
                     />
                 </>
                 }
