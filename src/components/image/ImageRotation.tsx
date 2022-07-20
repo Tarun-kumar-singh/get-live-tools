@@ -17,8 +17,8 @@ const ImageRotation = (props: Props) =>{
         onBack()
     }
 
-    const onChangeBlurValue = (e: any) =>{
-        makeBlur(URL.createObjectURL(selectedFile as Blob), e.target.value)
+    const onChangeBlurValue = (value: any) =>{
+        makeBlur(URL.createObjectURL(selectedFile as Blob), value)
     }
 
     const onSelectFile = async(e: any) => {
@@ -116,13 +116,16 @@ const ImageRotation = (props: Props) =>{
                         max={360}
                         aria-label="Small"
                         valueLabelDisplay="auto"
-                        onChange={onChangeBlurValue}
+                        // onChange={onChangeBlurValue}
                         sx={{
                             width: {
                                 lg: '40%',
                                 xs: '80%'
                             }
                         }}
+                        onChangeCommitted={(e: any, val: number) =>{
+                            onChangeBlurValue(val)
+                        } }
                     />
                 </>
                 }
