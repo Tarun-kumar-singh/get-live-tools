@@ -74,9 +74,9 @@ const ImgeBlur = (props: Props) =>{
                 </div>
             </div>
 
-            <div style={{ marginLeft: '3%' }}>
+            {previewImage && <div style={{ marginLeft: '3%' }}>
                 <Button onClick={() => downloadImageFromBase64(previewImage)} variant='outlined'>Download</Button>
-            </div>
+            </div>}
         </>
     )
 }
