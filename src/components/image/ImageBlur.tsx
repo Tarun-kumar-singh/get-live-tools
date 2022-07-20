@@ -1,5 +1,5 @@
 import { Button } from "@mui/material"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Image from 'next/image'
 import Jimp from 'jimp';
 
@@ -10,7 +10,11 @@ const ImgeBlur = (props: Props) =>{
 
     const { onBack } = props
     const [selectedFile, setSelectedFile] = useState()
-    const [previewImage, setPreviewImage] = useState<string | undefined>()
+    const [previewImage, setPreviewImage] = useState<string>('')
+
+    useEffect(() =>{
+        console.log(previewImage)
+    }, [previewImage])
 
     const onClickBack = () =>{
         onBack()
@@ -34,11 +38,19 @@ const ImgeBlur = (props: Props) =>{
         const bluredImage = image.blur(bluredValue);
  
         bluredImage.getBase64(Jimp.MIME_JPEG, (err, src) =>{
-            console.log(src)
             setPreviewImage(src)
         })
     }
     
+
+    const downloadImageFromBase64 = (base64Data: string) =>{
+        var a = document.createElement("a"); //Create <a>
+        a.href = base64Data; //Image Base64 Goes here
+        a.download = "Image.png"; //File name Here
+        a.click(); //Downloaded file
+    
+    }
+
     return(
         <>
             <div style={{ marginLeft: '3%' }}>
@@ -62,6 +74,9 @@ const ImgeBlur = (props: Props) =>{
                 </div>
             </div>
 
+            <div style={{ marginLeft: '3%' }}>
+                <Button onClick={() => downloadImageFromBase64(previewImage)} variant='outlined'>Download</Button>
+            </div>
         </>
     )
 }
