@@ -1,6 +1,7 @@
 import { Button } from "@mui/material"
 import { useState } from "react"
 import Image from 'next/image'
+import Jimp from 'jimp';
 
 type Props = {
     onBack: () => void
@@ -15,14 +16,30 @@ const ImgeBlur = (props: Props) =>{
         onBack()
     }
 
-    const onSelectFile = (e: any) => {
+    const onSelectFile = async(e: any) => {
+       
         if (!e.target.files || e.target.files.length === 0) {
             setSelectedFile(undefined)
             return
         }
         
         setSelectedFile(e.target.files[0])
-        setPreviewImage(URL.createObjectURL(e.target.files[0]));
+        const imageURL = URL.createObjectURL(e.target.files[0])
+        setPreviewImage(imageURL);
+
+      const image = await Jimp.read(imageURL);
+       const x = image.blur(50);
+
+        console.log(image)
+        console.log(x.getBase64(Jimp.MIME_JPEG, (err, src) =>{
+            console.log(src)
+            setPreviewImage(src)
+            console.log(err)
+        }))
+ 
+    }
+
+    const makeBlur = () =>{
 
     }
     
