@@ -8,6 +8,7 @@ import {useRouter} from 'next/router';
 import ImgBlankNWhite from '../../components/image/ImgBlankNWhite';
 import { addTagToUrl, getURlTagValue } from '../../hooks/useTagUrl';
 import ImageBlur from '../../components/image/ImageBlur';
+import ImageRotation from '../../components/image/ImageRotation';
  
 const getToolsComponent = (componentName: string, onBack: () => void) => {
 
@@ -16,7 +17,7 @@ const getToolsComponent = (componentName: string, onBack: () => void) => {
   }
 
   if(componentName === 'ImageBlur'){
-    return <ImageBlur onBack={onBack} />
+    return <ImageRotation onBack={onBack} />
    }
 
 }

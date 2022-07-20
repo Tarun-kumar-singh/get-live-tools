@@ -6,7 +6,7 @@ import Jimp from 'jimp';
 type Props = {
     onBack: () => void
 }
-const ImgeBlur = (props: Props) =>{
+const ImageRotation = (props: Props) =>{
 
     const { onBack } = props
     const [selectedFile, setSelectedFile] = useState<Blob | MediaSource | undefined>()
@@ -47,7 +47,7 @@ const ImgeBlur = (props: Props) =>{
         }
 
         const image = await Jimp.read(imageURL);
-        const bluredImage = image.blur(bluredValue);
+        const bluredImage = image.rotate(bluredValue);
  
         bluredImage.getBase64(Jimp.MIME_JPEG, (err, src) =>{
             setPreviewImage(src)
@@ -108,11 +108,12 @@ const ImgeBlur = (props: Props) =>{
             <>
                 {previewImage &&
                 <>
-                    <p>Blur value</p> 
+                    <p>Rotation value(in deg)</p> 
                     <Slider
                         size="small"
                         defaultValue={0}
                         min={0}
+                        max={360}
                         aria-label="Small"
                         valueLabelDisplay="auto"
                         onChange={onChangeBlurValue}
@@ -137,4 +138,4 @@ const ImgeBlur = (props: Props) =>{
     )
 }
 
-export default ImgeBlur;
+export default ImageRotation;
