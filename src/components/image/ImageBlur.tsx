@@ -1,4 +1,4 @@
-import { Button } from "@mui/material"
+import { Box, Button, Slider } from "@mui/material"
 import { useEffect, useState } from "react"
 import Image from 'next/image'
 import Jimp from 'jimp';
@@ -9,15 +9,16 @@ type Props = {
 const ImgeBlur = (props: Props) =>{
 
     const { onBack } = props
-    const [selectedFile, setSelectedFile] = useState()
+    const [selectedFile, setSelectedFile] = useState<Blob | MediaSource | undefined>()
     const [previewImage, setPreviewImage] = useState<string>('')
-
-    useEffect(() =>{
-        console.log(previewImage)
-    }, [previewImage])
 
     const onClickBack = () =>{
         onBack()
+    }
+
+    const onChangeBlurValue = (e: any) =>{
+        console.log(e.target.value)
+        makeBlur(URL.createObjectURL(selectedFile as Blob), e.target.value)
     }
 
     const onSelectFile = async(e: any) => {
@@ -29,7 +30,7 @@ const ImgeBlur = (props: Props) =>{
         
         setSelectedFile(e.target.files[0])
         const selectedImageURL = URL.createObjectURL(e.target.files[0])
-        makeBlur(selectedImageURL, 50)
+        // makeBlur(selectedImageURL, 100)
  
     }
 
@@ -77,6 +78,30 @@ const ImgeBlur = (props: Props) =>{
             {previewImage && <div style={{ marginLeft: '3%' }}>
                 <Button onClick={() => downloadImageFromBase64(previewImage)} variant='outlined'>Download</Button>
             </div>}
+            <Box
+                sx={{
+                    display: 'flex',
+                    justifyContent:'center', 
+                }}
+            >
+           
+            <>
+                <Slider
+                    size="small"
+                    defaultValue={70}
+                    aria-label="Small"
+                    valueLabelDisplay="auto"
+                    onChange={onChangeBlurValue}
+                    sx={{
+                        width: {
+                            lg: '40%',
+                            xs: '80%'
+                        }
+                    }}
+                />
+            </> 
+
+            </Box>
         </>
     )
 }
