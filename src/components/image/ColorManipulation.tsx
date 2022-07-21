@@ -1,9 +1,37 @@
-import { Box, Button, Slider } from "@mui/material"
+import { Box, Button, Slider, ToggleButton, ToggleButtonGroup } from "@mui/material"
 import { useEffect, useState } from "react"
 import Image from 'next/image'
 import Jimp from 'jimp';
 import AppLoader from "../share/appLoader";
+import { ObjectType } from "../../types/comman/object";
 
+const OperationValue: ObjectType = {
+    brightness: {
+        min: -1,
+        max: 1,
+        step: 0.1,
+        message:'Brightness'
+    },
+    contrast:{
+        min: -1,
+        max: 1,
+        step: 0.1,
+        message:'Contrast'
+    },
+    opacity:{
+        min: 0,
+        max: 1,
+        step: 0.1,
+        message: 'Opacity'
+    },
+    fade:{
+        min: 0,
+        max: 1,
+        step: 0.1,
+        message: 'Fade'
+    }
+
+}
 type Props = {
     onBack: () => void
 }
@@ -16,7 +44,9 @@ const ColorManipulation = (props: Props) =>{
 
     const [displayLoader, setDisplayLoader] = useState(false)
     const [changeValue, setChangeValue] = useState()
-    const [changeValUnitMsg, setChangeValUnitMsg] = useState('Rotation value(in deg):')
+
+    const [sliderValue, setSliderValue] = useState({ min: 0, max: 1, default: 0, step: 1, message: '' } as any)
+    const [selectedOperation, setSelectedOperation] = useState('')
 
     const onClickBack = () =>{
         onBack()
@@ -24,7 +54,7 @@ const ColorManipulation = (props: Props) =>{
 
     const onChangeBlurValue = (e: any, value: any) =>{
         setChangeValue(value)
-        makeBlur(URL.createObjectURL(selectedFile as Blob), value)
+        editOperation(URL.createObjectURL(selectedFile as Blob), value)
     }
 
     const onSelectFile = async(e: any) => {
@@ -38,31 +68,13 @@ const ColorManipulation = (props: Props) =>{
         setSelectedFile(e.target.files[0])
         const selectedImageURL = URL.createObjectURL(e.target.files[0])
         const jimpRead = await Jimp.read(selectedImageURL)
-       
+        
         jimpRead.getBase64(Jimp.MIME_JPEG, (err, src) =>{
             setSelectedImageBase64(src)
             setPreviewImage(src)
         })
         setDisplayLoader(false)
  
-    }
-
-    const makeBlur = async(imageURL: string, bluredValue: number) =>{
-        setDisplayLoader(true)
-        if(bluredValue === 0){
-            setPreviewImage(selectedImageBase64)
-            setDisplayLoader(false)
-            return
-        }
-
-        const image = await Jimp.read(imageURL);
-        const bluredImage = image.rotate(bluredValue);
- 
-        bluredImage.getBase64(Jimp.MIME_JPEG, (err, src) =>{
-            setPreviewImage(src)
-        })
-        setDisplayLoader(false)
-
     }
     
     const downloadImageFromBase64 = (base64Data: string) =>{
@@ -80,9 +92,41 @@ const ColorManipulation = (props: Props) =>{
 
     }
 
-    const onChangeContinueBlurValue = (e: any) =>{
+   const editOperation = async(imageURL: string, editValue: number) =>{
+    
+    setDisplayLoader(true)
+    
+    const image = await Jimp.read(imageURL);
+    let resultImage
+    
+    if(selectedOperation === 'brightness'){
+        resultImage = image.rotate(editValue);
+     }
+     else if(selectedOperation === 'contrast'){
+        resultImage = image.contrast(editValue)
+     }
+ 
+    else if(selectedOperation === 'opacity'){
+        resultImage = image.opacity(editValue) 
 
     }
+    else if(selectedOperation === 'fade'){
+        resultImage = image.fade(editValue) 
+    }
+
+    (resultImage as any).getBase64(Jimp.MIME_JPEG, (err: any, src: any) =>{
+        setPreviewImage(src)
+        setDisplayLoader(false)
+    })
+
+   }
+
+   const handleOperationTab = (event: React.MouseEvent<HTMLElement>, value: any): void =>{
+        console.log(value)
+        setSelectedOperation(value)
+        setSliderValue(OperationValue[value])
+        console.log(previewImage)
+   }
 
     return(
         <>
@@ -90,11 +134,36 @@ const ColorManipulation = (props: Props) =>{
             <div style={{ marginLeft: '3%' }}>
                 <Button onClick={onClickBack} variant='outlined'>Back</Button>
             </div>
+
          
-            <div style={{ display: 'flex', justifyContent: 'center', marginTop:'10px', flexDirection: 'column', alignItems: 'center', gap: '20px' }}> 
-                {previewImage && <div style={{ marginTop: '-50px' }}>
+            <div style={{ display: 'flex', justifyContent: 'center', marginTop:'5px', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>         
+
+            <div>
+                <ToggleButtonGroup
+                    value={selectedOperation}
+                    exclusive
+                    onChange={handleOperationTab}
+                    aria-label="text alignment"
+                >
+                    <ToggleButton value="brightness">
+                        Brightness
+                    </ToggleButton>
+                    <ToggleButton value="contrast">
+                        Contrast
+                    </ToggleButton>
+                    <ToggleButton value="opacity">
+                        Opacity
+                    </ToggleButton>
+                    <ToggleButton value="fade">
+                        Fade
+                    </ToggleButton>
+                </ToggleButtonGroup>
+            </div>
+
+                {previewImage && <div style={{ marginTop: 0 }}>
                     <Button disabled={displayLoader} onClick={reset} variant="text">Upload another image</Button> 
                 </div>}
+                
                 <div style={{ display:'flex', justifyContent:'center', alignItems:'center', width: '200px', height: '250px', border: '2px black', borderStyle: 'dotted'}}>
                     {!previewImage ? 
                         <Button disabled={displayLoader} variant="contained" component="label">
@@ -115,6 +184,7 @@ const ColorManipulation = (props: Props) =>{
                         </>
                     }  
                 </div>
+
             </div>
 
         
@@ -128,17 +198,18 @@ const ColorManipulation = (props: Props) =>{
             >
            
             <>
-                {previewImage &&
+                {previewImage && selectedOperation &&
                 <>  
-                    <p>{changeValUnitMsg} {changeValue}</p> 
+                    <p>{sliderValue.message}</p> 
                     <Slider
                         size="small"
-                        defaultValue={0}
-                        min={0}
-                        max={360}
+                        defaultValue={sliderValue.default}
+                        min={sliderValue.min}
+                        max={sliderValue.max}
                         aria-label="Small"
                         valueLabelDisplay="auto"
-                        onChange={onChangeContinueBlurValue}
+                        step={sliderValue.step}
+                        // onChange={onChangeContinueBlurValue}
                         sx={{
                             width: {
                                 lg: '40%',
