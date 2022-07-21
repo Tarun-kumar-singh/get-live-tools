@@ -58,7 +58,6 @@ const ColorManipulation = (props: Props) =>{
     const [changeValue, setChangeValue] = useState<any>({ rotation: 0, blur: 0, fade: 0, brighness: 0, contrast: 0, opacity: 0 })
 
     const [selectedOperation, setSelectedOperation] = useState('')
-    const [sliderValue, setSliderValue] = useState({...OperationValue[selectedOperation]})
 
     const onClickBack = () =>{
         onBack()
@@ -67,6 +66,7 @@ const ColorManipulation = (props: Props) =>{
     const onChangeBlurValue = (e: any, value: any) =>{
         console.log(value)
         console.log(selectedOperation)
+        
         setChangeValue({
             ...changeValue,
             [selectedOperation]: value
@@ -113,7 +113,7 @@ const ColorManipulation = (props: Props) =>{
     
     setDisplayLoader(true)
 
-    const image = await Jimp.read(previewImage);
+    const image = await Jimp.read(imageURL);
     let resultImage
     
     if(selectedOperation === 'brightness'){
@@ -145,8 +145,10 @@ const ColorManipulation = (props: Props) =>{
 
    const handleOperationTab = (event: React.MouseEvent<HTMLElement>, value: any): void =>{
         console.log(value)
-        // Change the operation
+
+        // Change the operation name
         setSelectedOperation(value)
+        
         console.log(changeValue)
     }
 
@@ -217,16 +219,15 @@ const ColorManipulation = (props: Props) =>{
             <>
                 {previewImage && selectedOperation &&
                 <>  
-                    <p>{sliderValue.message}</p> 
+                    <p>{OperationValue['message']}</p> 
                     <Slider
                         size="small"
-                        defaultValue={sliderValue.default}
-                        value={changeValue[selectedOperation] || 0}
-                        min={sliderValue.min}
-                        max={sliderValue.max}
+                        defaultValue={OperationValue[selectedOperation]}
+                        min={OperationValue['min']}
+                        max={OperationValue['max']}
                         aria-label="Small"
                         valueLabelDisplay="auto"
-                        step={sliderValue.step}
+                        step={OperationValue['step']}
                         sx={{
                             width: {
                                 lg: '40%',
