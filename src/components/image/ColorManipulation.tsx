@@ -12,6 +12,12 @@ const OperationValue: ObjectType = {
         step: 1,
         message:'Rotation'
     },
+    blur: {
+        min: 0,
+        max: 360,
+        step: 1,
+        message:'Blur'
+    },
     brightness: {
         min: -1,
         max: 1,
@@ -154,6 +160,7 @@ const ColorManipulation = (props: Props) =>{
                     exclusive
                     onChange={handleOperationTab}
                     aria-label="text alignment"
+                    size="small"
                 >
                     {
                         Object.keys(OperationValue).map((el: any, index) =>(
