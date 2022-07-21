@@ -5,19 +5,20 @@ import { ImageTools } from '../../constants/tools/image';
 import Jimp from 'jimp';
 import { useEffect, useState } from 'react';
 import {useRouter} from 'next/router';
-import ImgBlankNWhite from '../../components/image/ImgBlankNWhite';
+import ImgBlankNWhite from '../../components/image/ColorManipulation';
 import { addTagToUrl, getURlTagValue } from '../../hooks/useTagUrl';
 import ImageBlur from '../../components/image/ImageBlur';
 import ImageRotation from '../../components/image/ImageRotation';
+import ColorManipulation from '../../components/image/ColorManipulation';
  
 const getToolsComponent = (componentName: string, onBack: () => void) => {
 
   if(componentName === 'ImageBlackNWhite'){
-   return <ImgBlankNWhite />
+  //  return <ImgBlankNWhite />
   }
 
   if(componentName === 'ImageBlur'){
-    return <ImageRotation onBack={onBack} />
+    return <ColorManipulation onBack={onBack} />
    }
 
 }
