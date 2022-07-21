@@ -125,7 +125,6 @@ const ColorManipulation = (props: Props) =>{
         console.log(value)
         setSelectedOperation(value)
         setSliderValue(OperationValue[value])
-        console.log(previewImage)
    }
 
     return(
