@@ -47,7 +47,7 @@ const OperationValue: ObjectType = {
 type Props = {
     onBack: () => void
 }
-const ColorManipulation = (props: Props) =>{
+const ImageManipulation = (props: Props) =>{
 
     const { onBack } = props
     const [selectedFile, setSelectedFile] = useState<Blob | MediaSource | undefined>()
@@ -257,4 +257,4 @@ const ColorManipulation = (props: Props) =>{
     )
 }
 
-export default ColorManipulation;
+export default ImageManipulation;
