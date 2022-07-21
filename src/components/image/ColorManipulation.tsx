@@ -6,6 +6,12 @@ import AppLoader from "../share/appLoader";
 import { ObjectType } from "../../types/comman/object";
 
 const OperationValue: ObjectType = {
+    rotation:{
+        min: 0,
+        max: 360,
+        step: 1,
+        message:'Rotation'
+    },
     brightness: {
         min: -1,
         max: 1,
@@ -113,6 +119,9 @@ const ColorManipulation = (props: Props) =>{
     else if(selectedOperation === 'fade'){
         resultImage = image.fade(editValue) 
     }
+    else if(selectedOperation === 'rotation'){
+        resultImage = image.rotate(editValue) 
+    }
 
     (resultImage as any).getBase64(Jimp.MIME_JPEG, (err: any, src: any) =>{
         setPreviewImage(src)
@@ -146,10 +155,15 @@ const ColorManipulation = (props: Props) =>{
                     onChange={handleOperationTab}
                     aria-label="text alignment"
                 >
-                    <ToggleButton value="brightness">
-                        Brightness
-                    </ToggleButton>
-                    <ToggleButton value="contrast">
+                    {
+                        Object.keys(OperationValue).map((el: any, index) =>(
+                            <ToggleButton key={el.message} value={el}>
+                                {OperationValue[el].message}
+                            </ToggleButton>
+                        ))
+                    }
+                 
+                    {/* <ToggleButton value="contrast">
                         Contrast
                     </ToggleButton>
                     <ToggleButton value="opacity">
@@ -157,7 +171,7 @@ const ColorManipulation = (props: Props) =>{
                     </ToggleButton>
                     <ToggleButton value="fade">
                         Fade
-                    </ToggleButton>
+                    </ToggleButton> */}
                 </ToggleButtonGroup>
             </div>}
 
