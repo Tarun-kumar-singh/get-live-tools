@@ -232,7 +232,7 @@ const ColorManipulation = (props: Props) =>{
                         min={selectedOperationValue.min}
                         max={selectedOperationValue.max}
                         step={selectedOperationValue.step}
-                        valueLabelDisplay="auto"
+                        valueLabelDisplay="on"
                         sx={{
                             width: {
                                 lg: '40%',
