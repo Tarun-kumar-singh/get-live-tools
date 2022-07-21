@@ -14,7 +14,7 @@ const OperationValue: ObjectType = {
     },
     blur: {
         min: 0,
-        max: 360,
+        max: 100,
         step: 1,
         message:'Blur'
     },
@@ -127,6 +127,9 @@ const ColorManipulation = (props: Props) =>{
     }
     else if(selectedOperation === 'rotation'){
         resultImage = image.rotate(editValue) 
+    }
+    else if(selectedOperation === 'blur'){
+        resultImage = image.blur(editValue) 
     }
 
     (resultImage as any).getBase64(Jimp.MIME_JPEG, (err: any, src: any) =>{
