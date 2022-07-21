@@ -55,7 +55,7 @@ const ColorManipulation = (props: Props) =>{
     const [selectedImageBase64, setSelectedImageBase64] = useState<string>('')
 
     const [displayLoader, setDisplayLoader] = useState(false)
-    const [changeValue, setChangeValue] = useState(0)
+    const [changeValue, setChangeValue] = useState<any>({ rotation: 0, blur: 0, fade: 0, brighness: 0, contrast: 0, opacity: 0 })
 
     const [sliderValue, setSliderValue] = useState({ min: 0, max: 1, default: 0, step: 1, message: '' } as any)
     const [selectedOperation, setSelectedOperation] = useState('')
@@ -65,7 +65,10 @@ const ColorManipulation = (props: Props) =>{
     }
 
     const onChangeBlurValue = (e: any, value: any) =>{
-        setChangeValue(value)
+        setChangeValue({
+            ...changeValue,
+            [selectedOperation]: value
+        })
         editOperation(URL.createObjectURL(selectedFile as Blob), value)
     }
 
@@ -173,15 +176,6 @@ const ColorManipulation = (props: Props) =>{
                         ))
                     }
                  
-                    {/* <ToggleButton value="contrast">
-                        Contrast
-                    </ToggleButton>
-                    <ToggleButton value="opacity">
-                        Opacity
-                    </ToggleButton>
-                    <ToggleButton value="fade">
-                        Fade
-                    </ToggleButton> */}
                 </ToggleButtonGroup>
             </div>}
 
@@ -229,7 +223,7 @@ const ColorManipulation = (props: Props) =>{
                     <Slider
                         size="small"
                         defaultValue={sliderValue.default}
-                        value={changeValue}
+                        value={changeValue[selectedOperation]}
                         min={sliderValue.min}
                         max={sliderValue.max}
                         aria-label="Small"
