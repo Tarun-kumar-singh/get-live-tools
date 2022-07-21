@@ -43,7 +43,7 @@ const ColorManipulation = (props: Props) =>{
     const [selectedImageBase64, setSelectedImageBase64] = useState<string>('')
 
     const [displayLoader, setDisplayLoader] = useState(false)
-    const [changeValue, setChangeValue] = useState()
+    const [changeValue, setChangeValue] = useState(0)
 
     const [sliderValue, setSliderValue] = useState({ min: 0, max: 1, default: 0, step: 1, message: '' } as any)
     const [selectedOperation, setSelectedOperation] = useState('')
@@ -123,9 +123,10 @@ const ColorManipulation = (props: Props) =>{
 
    const handleOperationTab = (event: React.MouseEvent<HTMLElement>, value: any): void =>{
         console.log(value)
+        setChangeValue(0)
         setSelectedOperation(value)
         setSliderValue(OperationValue[value])
-   }
+    }
 
     return(
         <>
@@ -137,7 +138,8 @@ const ColorManipulation = (props: Props) =>{
          
             <div style={{ display: 'flex', justifyContent: 'center', marginTop:'5px', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>         
 
-            <div>
+            {previewImage
+             && <div>
                 <ToggleButtonGroup
                     value={selectedOperation}
                     exclusive
@@ -157,7 +159,7 @@ const ColorManipulation = (props: Props) =>{
                         Fade
                     </ToggleButton>
                 </ToggleButtonGroup>
-            </div>
+            </div>}
 
                 {previewImage && <div style={{ marginTop: 0 }}>
                     <Button disabled={displayLoader} onClick={reset} variant="text">Upload another image</Button> 
@@ -203,12 +205,12 @@ const ColorManipulation = (props: Props) =>{
                     <Slider
                         size="small"
                         defaultValue={sliderValue.default}
+                        value={changeValue}
                         min={sliderValue.min}
                         max={sliderValue.max}
                         aria-label="Small"
                         valueLabelDisplay="auto"
                         step={sliderValue.step}
-                        // onChange={onChangeContinueBlurValue}
                         sx={{
                             width: {
                                 lg: '40%',
