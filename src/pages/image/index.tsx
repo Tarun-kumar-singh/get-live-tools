@@ -18,7 +18,7 @@ const getToolsComponent = (componentName: string, onBack: () => void) => {
   //  return <ImgBlankNWhite />
   }
 
-  if(componentName === 'ImageBlur'){
+  if(componentName === 'EditImage'){
     return <ImageManipulation onBack={onBack} />
    }
 
