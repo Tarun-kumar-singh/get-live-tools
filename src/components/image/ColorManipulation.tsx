@@ -102,7 +102,7 @@ const ColorManipulation = (props: Props) =>{
     
     setDisplayLoader(true)
     
-    const image = await Jimp.read(imageURL);
+    const image = await Jimp.read(previewImage);
     let resultImage
     
     if(selectedOperation === 'brightness'){
