@@ -224,7 +224,7 @@ const ColorManipulation = (props: Props) =>{
             <>
                 {previewImage && selectedOperation &&
                 <>  
-                    <p>{OperationValue['message']}</p> 
+                    <p>{selectedOperationValue.message}</p> 
                     <Slider
                        onChange={sliderValueChange}
                         size="small"
