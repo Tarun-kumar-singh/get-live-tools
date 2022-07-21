@@ -37,10 +37,8 @@ const ColorManipulation = (props: Props) =>{
         
         setSelectedFile(e.target.files[0])
         const selectedImageURL = URL.createObjectURL(e.target.files[0])
-       const jimpRead = await Jimp.read(selectedImageURL)
+        const jimpRead = await Jimp.read(selectedImageURL)
        
-       jimpRead.brightness(20)
-
         jimpRead.getBase64(Jimp.MIME_JPEG, (err, src) =>{
             setSelectedImageBase64(src)
             setPreviewImage(src)
