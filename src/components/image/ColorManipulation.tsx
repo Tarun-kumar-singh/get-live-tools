@@ -55,9 +55,10 @@ const ColorManipulation = (props: Props) =>{
     const [selectedImageBase64, setSelectedImageBase64] = useState<string>('')
 
     const [displayLoader, setDisplayLoader] = useState(false)
-    const [changeValue, setChangeValue] = useState<any>({ rotation: 0, blur: 0, fade: 0, brighness: 0, contrast: 0, opacity: 0 })
 
+    const [changeValue, setChangeValue] = useState<any>({ rotation: 0, blur: 0, fade: 0, brighness: 0, contrast: 0, opacity: 0 })
     const [selectedOperation, setSelectedOperation] = useState('')
+    const [selectedOperationValue, setSelectedOperationValue] = useState({} as any) // OperatioValue[selectedOperation]
 
     const onClickBack = () =>{
         onBack()
@@ -66,11 +67,6 @@ const ColorManipulation = (props: Props) =>{
     const onChangeBlurValue = (e: any, value: any) =>{
         console.log(value)
         console.log(selectedOperation)
-        
-        setChangeValue({
-            ...changeValue,
-            [selectedOperation]: value
-        })
         editOperation(URL.createObjectURL(selectedFile as Blob), value)
     }
 
@@ -148,8 +144,17 @@ const ColorManipulation = (props: Props) =>{
 
         // Change the operation name
         setSelectedOperation(value)
-        
+        setSelectedOperationValue({...OperationValue[value]})
+
         console.log(changeValue)
+    }
+
+    const sliderValueChange = (e: any, val: any) =>{
+        console.log(val)
+        setChangeValue({
+            ...changeValue,
+            [selectedOperation]: val
+        })
     }
 
     return(
@@ -221,13 +226,14 @@ const ColorManipulation = (props: Props) =>{
                 <>  
                     <p>{OperationValue['message']}</p> 
                     <Slider
+                       onChange={sliderValueChange}
                         size="small"
-                        defaultValue={OperationValue[selectedOperation]}
-                        min={OperationValue['min']}
-                        max={OperationValue['max']}
-                        aria-label="Small"
+                        // defaultValue={selectedOperation.default}
+                        value={changeValue[selectedOperation]}
+                        min={selectedOperationValue.min}
+                        max={selectedOperationValue.max}
+                        step={selectedOperationValue.step}
                         valueLabelDisplay="auto"
-                        step={OperationValue['step']}
                         sx={{
                             width: {
                                 lg: '40%',
