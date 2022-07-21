@@ -228,7 +228,6 @@ const ColorManipulation = (props: Props) =>{
                     <Slider
                        onChange={sliderValueChange}
                         size="small"
-                        // defaultValue={selectedOperation.default}
                         value={changeValue[selectedOperation]}
                         min={selectedOperationValue.min}
                         max={selectedOperationValue.max}
