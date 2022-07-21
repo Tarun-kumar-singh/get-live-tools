@@ -57,14 +57,16 @@ const ColorManipulation = (props: Props) =>{
     const [displayLoader, setDisplayLoader] = useState(false)
     const [changeValue, setChangeValue] = useState<any>({ rotation: 0, blur: 0, fade: 0, brighness: 0, contrast: 0, opacity: 0 })
 
-    const [sliderValue, setSliderValue] = useState({ min: 0, max: 1, default: 0, step: 1, message: '' } as any)
     const [selectedOperation, setSelectedOperation] = useState('')
+    const [sliderValue, setSliderValue] = useState({...OperationValue[selectedOperation]})
 
     const onClickBack = () =>{
         onBack()
     }
 
     const onChangeBlurValue = (e: any, value: any) =>{
+        console.log(value)
+        console.log(selectedOperation)
         setChangeValue({
             ...changeValue,
             [selectedOperation]: value
@@ -111,7 +113,7 @@ const ColorManipulation = (props: Props) =>{
     
     setDisplayLoader(true)
     
-    const image = await Jimp.read(previewImage);
+    const image = await Jimp.read(imageURL);
     let resultImage
     
     if(selectedOperation === 'brightness'){
@@ -123,7 +125,6 @@ const ColorManipulation = (props: Props) =>{
  
     else if(selectedOperation === 'opacity'){
         resultImage = image.opacity(editValue) 
-
     }
     else if(selectedOperation === 'fade'){
         resultImage = image.fade(editValue) 
@@ -144,9 +145,8 @@ const ColorManipulation = (props: Props) =>{
 
    const handleOperationTab = (event: React.MouseEvent<HTMLElement>, value: any): void =>{
         console.log(value)
-        setChangeValue(0)
+        // Change the operation
         setSelectedOperation(value)
-        setSliderValue(OperationValue[value])
     }
 
     return(
@@ -154,7 +154,6 @@ const ColorManipulation = (props: Props) =>{
             <div style={{ marginLeft: '3%' }}>
                 <Button onClick={onClickBack} variant='outlined'>Back</Button>
             </div>
-
          
             <div style={{ display: 'flex', justifyContent: 'center', marginTop:'5px', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>         
 
@@ -204,7 +203,6 @@ const ColorManipulation = (props: Props) =>{
                 </div>
 
             </div>
-
         
             <Box
                 sx={{
@@ -222,7 +220,7 @@ const ColorManipulation = (props: Props) =>{
                     <Slider
                         size="small"
                         defaultValue={sliderValue.default}
-                        value={changeValue[selectedOperation]}
+                        value={changeValue[selectedOperation] || 0}
                         min={sliderValue.min}
                         max={sliderValue.max}
                         aria-label="Small"
