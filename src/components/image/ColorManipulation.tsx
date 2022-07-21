@@ -13,7 +13,7 @@ const OperationValue: ObjectType = {
         message:'Rotation'
     },
     blur: {
-        min: 0,
+        min: 1,
         max: 100,
         step: 1,
         message:'Blur'
@@ -112,8 +112,8 @@ const ColorManipulation = (props: Props) =>{
    const editOperation = async(imageURL: string, editValue: number) =>{
     
     setDisplayLoader(true)
-    
-    const image = await Jimp.read(imageURL);
+
+    const image = await Jimp.read(previewImage);
     let resultImage
     
     if(selectedOperation === 'brightness'){
@@ -147,6 +147,7 @@ const ColorManipulation = (props: Props) =>{
         console.log(value)
         // Change the operation
         setSelectedOperation(value)
+        console.log(changeValue)
     }
 
     return(
