@@ -151,7 +151,6 @@ const ColorManipulation = (props: Props) =>{
 
     return(
         <>
-        <p>Colors manipulation</p>
             <div style={{ marginLeft: '3%' }}>
                 <Button onClick={onClickBack} variant='outlined'>Back</Button>
             </div>
