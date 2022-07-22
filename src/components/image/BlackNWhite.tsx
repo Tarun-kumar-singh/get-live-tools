@@ -2,6 +2,7 @@ import { Button } from "@mui/material"
 import { useState } from "react"
 import Jimp from 'jimp';
 import SelectImage from "../share/SelectImage";
+import { downloadImageFromBase64 } from "../../utils/image";
 
 type Props = {
     onBack: () => void
@@ -38,16 +39,9 @@ const BlackNWhite = (props: Props) => {
         const jimpRead = await Jimp.read(selectedImageUrl)
         const editedImage = jimpRead.greyscale()
         editedImage.getBase64(imageType, (err, src) =>{
-            setDisplayLoader(false)
             downloadImageFromBase64(src, `Image.${imageType.split('/')[1]}`)
+            setDisplayLoader(false)
         })   
-    }
-
-    const downloadImageFromBase64 = (base64Data: string, name: string) =>{
-        var a = document.createElement("a"); //Create <a>
-        a.href = base64Data; //Image Base64 Goes here
-        a.download = name; //File name Here
-        a.click(); //Downloaded file
     }
 
     const onClickBack = () =>{

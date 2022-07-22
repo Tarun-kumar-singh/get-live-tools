@@ -2,6 +2,7 @@ import { Button, Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import { useState } from "react";
 import SelectImage from "../share/SelectImage";
 import Jimp from 'jimp';
+import { downloadImageFromBase64 } from "../../utils/image";
 
 type Props = {
     onBack: () => void;
@@ -49,16 +50,7 @@ const ImageFlip = (props: Props) => {
     }
 
     const onDownload = async() =>{
-        setDisplayLoader(true)
         downloadImageFromBase64(resultImage, `Image.${imageType.split('/')[1]}`)
-    }
-
-    const downloadImageFromBase64 = (base64Data: string, name: string) =>{
-        var a = document.createElement("a"); //Create <a>
-        a.href = base64Data; //Image Base64 Goes here
-        a.download = name; //File name Here
-        a.click(); //Downloaded file
-        setDisplayLoader(false)
     }
 
     const onFlipImage = async() =>{
