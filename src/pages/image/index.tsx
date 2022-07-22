@@ -7,7 +7,6 @@ import { useEffect, useState } from 'react';
 import {useRouter} from 'next/router';
 import ImgBlankNWhite from '../../components/image/ImageManipulation';
 import { addTagToUrl, getURlTagValue } from '../../hooks/useTagUrl';
-import ImageBlur from '../../components/image/ImageBlur';
 import ImageRotation from '../../components/image/ImageRotation';
 import ColorManipulation from '../../components/image/ImageManipulation';
 import ImageManipulation from '../../components/image/ImageManipulation';
