@@ -13,19 +13,23 @@ import ColorManipulation from '../../components/image/ImageManipulation';
 import ImageManipulation from '../../components/image/ImageManipulation';
 import ChangeFormat from '../../components/image/ChangeFormat';
 import BlackNWhite from '../../components/image/BlackNWhite';
+import ImageFlip from '../../components/image/ImageFlip';
  
 const getToolsComponent = (componentName: string, onBack: () => void) => {
 
   if(componentName === 'ChangeFormat'){
    return <ChangeFormat onBack={onBack}/>
   }
-
   else if(componentName === 'EditImage'){
     return <ImageManipulation onBack={onBack} />
    }
   else if(componentName === 'BlackNWhite'){
     return <BlackNWhite onBack={onBack} />
    } 
+   else if(componentName === 'FlipImage'){
+    return <ImageFlip onBack={onBack} />
+   } 
+   
 
 }
 
