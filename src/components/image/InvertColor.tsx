@@ -17,6 +17,7 @@ const InvertColor = (props: Props) => {
     const [selectedImageUrl, setSelectedImageUrl] = useState('')
 
     const [resultImage, setResultImage] = useState('')
+    const [inverted, setInverted] = useState(false)
 
     const onSelectFile = async(e: any) => {
         setDisplayLoader(true)
@@ -41,6 +42,7 @@ const InvertColor = (props: Props) => {
         setImageType('')
         setSelectedImageUrl('')
         setResultImage('')
+        setInverted(false)
     }
 
     const onClickBack = () =>{
@@ -58,6 +60,7 @@ const InvertColor = (props: Props) => {
         flipedImg.getBase64(imageType, (err, src) =>{
             setResultImage(src)
             setDisplayLoader(false)
+            setInverted(true)
         })   
     }
    
@@ -72,7 +75,7 @@ const InvertColor = (props: Props) => {
                     Invert color of image
               </Typography>
             </div>  
-            {selectedImageUrl && <div style={{ display: 'flex', justifyContent: 'center' }}>
+            {selectedImageUrl && !inverted && <div style={{ display: 'flex', justifyContent: 'center' }}>
                 <Button variant="contained" onClick={invert}>Invert</Button>
             </div>}
             <div style={{ marginLeft: '3%' }}>
