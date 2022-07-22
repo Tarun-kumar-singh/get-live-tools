@@ -4,7 +4,6 @@ import AppLoader from "../share/appLoader";
 import Image from 'next/image'
 import Jimp from 'jimp';
 import SelectMenuField from "../share/form/SelectMenuField";
-import { ObjectType } from "../../types/comman/object";
 
 const menuData: Array<{label: string, value: any}> = [
     { label: 'PNG', value: Jimp.MIME_PNG},
