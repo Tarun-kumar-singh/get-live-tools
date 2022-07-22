@@ -3,6 +3,7 @@ import { useState } from "react"
 import AppLoader from "../share/appLoader"
 import Image from 'next/image'
 import Jimp from 'jimp';
+import SelectImage from "../share/SelectImage";
 
 type Props = {
     onBack: () => void
@@ -15,7 +16,6 @@ const BlackNWhite = (props: Props) => {
     const [imageType, setImageType] = useState('')
 
     const [selectedImageUrl, setSelectedImageUrl] = useState('')
-
 
     const onSelectFile = async(e: any) => {
         setDisplayLoader(true)
@@ -57,28 +57,16 @@ const BlackNWhite = (props: Props) => {
     return(
         <>
             <div style={{ display: 'flex', justifyContent: 'center', marginTop:'5px', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>         
-            {selectedImageUrl && <div style={{ marginTop: 0 }}>
+            {selectedImageUrl && 
+                <div style={{ marginTop: 0 }}>
                     <Button disabled={displayLoader} onClick={reset} variant="text">Upload another image</Button> 
-                </div>}
-                <div style={{ display:'flex', justifyContent:'center', alignItems:'center', width: '200px', height: '250px', border: '2px black', borderStyle: 'dotted'}}>
-                        {!selectedImageUrl ? 
-                            <Button disabled={displayLoader} variant="contained" component="label">
-                                    {displayLoader ? 'Uploading...' : 'Upload image'}
-                                <input hidden onChange={onSelectFile} accept="image/*" multiple type="file" />
-                            </Button> : 
-                            <>
-                                <Image
-                                    src={selectedImageUrl}
-                                    alt="Image is not displyaing"
-                                    width={200}
-                                    height={250}
-                                />
-                                <div style={{ position:'absolute'}}>
-                                    {displayLoader && <AppLoader />}
-                                </div>
-                            </>
-                        }  
                 </div>
+            }
+                <SelectImage
+                    displayLoader={displayLoader}
+                    onSelectFile={onSelectFile}
+                    selectedImageUrl={selectedImageUrl}
+                />
                 {
                 selectedImageUrl && 
                     <Button onClick={onDownload}> Downlaod blank and white</Button>
