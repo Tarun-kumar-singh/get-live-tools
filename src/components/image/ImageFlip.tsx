@@ -20,7 +20,7 @@ const ImageFlip = (props: Props) => {
 
     const [selectedImageUrl, setSelectedImageUrl] = useState('')
 
-    const [selectedFlipValue, setSelectedFlipValue] = useState({ h: false, v: false })
+    const [flipValue, setFlipValue] = useState({ h: false, v: false } as any)
 
     const [resultImage, setResultImage] = useState('')
 
@@ -65,7 +65,7 @@ const ImageFlip = (props: Props) => {
     }
 
     const onFlipImage = async() =>{
-        console.log(selectedFlipValue)
+        console.log(flipValue)
         const resImg = await Jimp.read(selectedImageUrl)
         const flipedImg = resImg.flip(true, true)
         flipedImg.getBase64(imageType, (err, src) =>{
@@ -73,9 +73,9 @@ const ImageFlip = (props: Props) => {
         })   
     }
 
-    const flipValueChange = () =>{
-
-    }
+    const flipValueChange = (name: string, value: any) =>{
+        console.log(name, value)
+    }   
 
     return(
         <>
@@ -85,8 +85,8 @@ const ImageFlip = (props: Props) => {
             <div style={{ display:'flex', justifyContent:'center', alignItems:'center', flexDirection: 'column', gap: '10px'}}>
             {selectedImageUrl && 
                  <FormGroup>
-                    <FormControlLabel onChange={(e: any, val: any) => setSelectedFlipValue({ ...flipValueChange, h: value})} control={<Checkbox defaultChecked />} label={true} />
-                    <FormControlLabel control={<Checkbox defaultChecked />} label="Verticle" />
+                    <FormControlLabel value={flipValue.h} onChange={(e: any, val: any) => flipValueChange('h', val)} control={<Checkbox />} label='Horizontal' />
+                    <FormControlLabel value={flipValue.v} onChange={(e: any, val: any) => flipValueChange('v', val)} control={<Checkbox />} label="Verticle" />
                     <Button onClick={onFlipImage}>Flip</Button>
                </FormGroup>
             }
@@ -98,7 +98,7 @@ const ImageFlip = (props: Props) => {
                 <SelectImage
                     displayLoader={displayLoader}
                     onSelectFile={onSelectFile}
-                    selectedImageUrl={selectedImageUrl}
+                    selectedImageUrl={resultImage}
                 />
                 {
                 selectedImageUrl && 
