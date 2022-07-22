@@ -75,7 +75,7 @@ const Index: NextPage = () => {
       }
 
       {!selectedTools && 
-          <Box sx={{ display:'flex', justifyContent:'center', gap: '13px', flexWrap: 'wrap' }}>
+          <Box sx={{ display:'flex', justifyContent:'center', gap: '13px', flexWrap: 'wrap', marginBottom: '20px' }}>
             {
                 ImageTools.map((el: any) =>(
                   <ToolsCard onToolCardClick={() => onToolCardClick(el)} key={el.label} title={el.label} />
