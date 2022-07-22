@@ -1,13 +1,8 @@
-import { Button, Checkbox, FormControlLabel, FormGroup, ToggleButton, ToggleButtonGroup } from "@mui/material";
+import { Button, Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import { useState } from "react";
 import SelectImage from "../share/SelectImage";
 import Jimp from 'jimp';
-import { Preview } from "@mui/icons-material";
 
-const FlipTypes: Array<any> = [
-    {label: 'Horizontal', value:'horz'},
-    {label: 'Verticle', value:'vert'},
-]
 type Props = {
     onBack: () => void;
 }
@@ -46,6 +41,7 @@ const ImageFlip = (props: Props) => {
     const reset = () =>{
         setImageType('')
         setSelectedImageUrl('')
+        setResultImage('')
     }
 
     const onClickBack = () =>{
@@ -65,16 +61,18 @@ const ImageFlip = (props: Props) => {
     }
 
     const onFlipImage = async() =>{
-        console.log(flipValue)
         const resImg = await Jimp.read(selectedImageUrl)
-        const flipedImg = resImg.flip(true, true)
+        const flipedImg = resImg.flip(flipValue.h, flipValue.v)
         flipedImg.getBase64(imageType, (err, src) =>{
             setResultImage(src)
         })   
     }
 
     const flipValueChange = (name: string, value: any) =>{
-        console.log(name, value)
+        setFlipValue({
+            ...flipValue,
+            [name]: value
+        })
     }   
 
     return(
