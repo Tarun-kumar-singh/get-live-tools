@@ -30,6 +30,10 @@ const TabMenu = (props: Props) =>{
     }
 
     const handleChange = (event: React.SyntheticEvent, newValue: number, route: string) => {
+      if(newValue === value){
+        router.back()
+        return
+      }
       setValue(newValue);
       router.push(route)
     };

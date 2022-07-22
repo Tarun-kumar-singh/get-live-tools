@@ -18,16 +18,16 @@ const getToolsComponent = (componentName: string, onBack: () => void) => {
   }
   else if(componentName === 'EditImage'){
     return <ImageManipulation onBack={onBack} />
-   }
+  }
   else if(componentName === 'BlackNWhite'){
     return <BlackNWhite onBack={onBack} />
-   } 
-   else if(componentName === 'FlipImage'){
+  } 
+  else if(componentName === 'FlipImage'){
     return <ImageFlip onBack={onBack} />
-   } 
-   else if(componentName === 'InvertColor'){
+  } 
+  else if(componentName === 'InvertColor'){
     return <InvertColor onBack={onBack} />
-   } 
+  } 
 }
 
 const Index: NextPage = () => {
