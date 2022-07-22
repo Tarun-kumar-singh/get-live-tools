@@ -5,11 +5,12 @@ import Image from 'next/image'
 type Props = {
     onSelectFile: (e: any) => void,
     displayLoader: boolean,
-    selectedImageUrl: string
+    selectedImageUrl: string,
+    onDownload: () => void
 }
 const SelectImage = (props:Props) =>{
 
-    const { displayLoader, onSelectFile, selectedImageUrl } = props
+    const { displayLoader, onSelectFile, onDownload, selectedImageUrl } = props
 
     return(
         <>
@@ -30,7 +31,13 @@ const SelectImage = (props:Props) =>{
                                     {displayLoader && <AppLoader />}
                                 </div>
                             </>
-                        }  
+                        }
+                </div>
+                <div>
+                    {
+                        selectedImageUrl && 
+                            <Button disabled={displayLoader} onClick={onDownload}>Downlaod</Button>
+                    }   
                 </div>
         </>
     )

@@ -69,11 +69,8 @@ const BlackNWhite = (props: Props) => {
                     displayLoader={displayLoader}
                     onSelectFile={onSelectFile}
                     selectedImageUrl={selectedImageUrl}
-                />
-                {
-                selectedImageUrl && 
-                    <Button onClick={onDownload}> Downlaod blank and white</Button>
-                }            
+                    onDownload={onDownload}
+                /> 
                 </div>        
         </>
     )

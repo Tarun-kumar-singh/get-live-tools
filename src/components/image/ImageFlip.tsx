@@ -100,11 +100,9 @@ const ImageFlip = (props: Props) => {
                     displayLoader={displayLoader}
                     onSelectFile={onSelectFile}
                     selectedImageUrl={resultImage}
+                    onDownload={onDownload}
                 />
-                {
-                    selectedImageUrl && 
-                        <Button onClick={onDownload}>Downlaod</Button>
-                }   
+               
             </div>
         </>
     )
