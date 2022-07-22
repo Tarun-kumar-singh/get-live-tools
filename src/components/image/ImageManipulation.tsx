@@ -102,7 +102,6 @@ const ImageManipulation = (props: Props) =>{
         setSelectedFile(undefined)
         setPreviewImage('')
         setSelectedImageBase64('')
-
     }
 
    const editOperation = async(imageURL: string, editValue: number) =>{

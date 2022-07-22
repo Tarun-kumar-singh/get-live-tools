@@ -30,6 +30,11 @@ const BlackNWhite = (props: Props) => {
         setDisplayLoader(false)
     }
 
+    const reset = () =>{
+        setImageType('')
+        setSelectedImageUrl('')
+    }
+
     const onDownload = async() =>{
         setDisplayLoader(true)
         const jimpRead = await Jimp.read(selectedImageUrl)
@@ -52,7 +57,9 @@ const BlackNWhite = (props: Props) => {
     return(
         <>
             <div style={{ display: 'flex', justifyContent: 'center', marginTop:'5px', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>         
-
+            {selectedImageUrl && <div style={{ marginTop: 0 }}>
+                    <Button disabled={displayLoader} onClick={reset} variant="text">Upload another image</Button> 
+                </div>}
                 <div style={{ display:'flex', justifyContent:'center', alignItems:'center', width: '200px', height: '250px', border: '2px black', borderStyle: 'dotted'}}>
                         {!selectedImageUrl ? 
                             <Button disabled={displayLoader} variant="contained" component="label">
