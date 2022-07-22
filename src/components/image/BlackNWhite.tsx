@@ -1,7 +1,5 @@
-import { Button, Switch } from "@mui/material"
+import { Button } from "@mui/material"
 import { useState } from "react"
-import AppLoader from "../share/appLoader"
-import Image from 'next/image'
 import Jimp from 'jimp';
 import SelectImage from "../share/SelectImage";
 
@@ -39,9 +37,7 @@ const BlackNWhite = (props: Props) => {
         setDisplayLoader(true)
         const jimpRead = await Jimp.read(selectedImageUrl)
         const editedImage = jimpRead.greyscale()
-        console.log(editedImage)
         editedImage.getBase64(imageType, (err, src) =>{
-            console.log(src)
             setDisplayLoader(false)
             downloadImageFromBase64(src, `Image.${imageType.split('/')[1]}`)
         })   
@@ -54,8 +50,15 @@ const BlackNWhite = (props: Props) => {
         a.click(); //Downloaded file
     }
 
+    const onClickBack = () =>{
+        onBack()
+    }
+
     return(
         <>
+            <div style={{ marginLeft: '3%' }}>
+                <Button onClick={onClickBack} variant='outlined'>Back</Button>
+            </div>
             <div style={{ display: 'flex', justifyContent: 'center', marginTop:'5px', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>         
             {selectedImageUrl && 
                 <div style={{ marginTop: 0 }}>
