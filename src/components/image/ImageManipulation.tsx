@@ -52,7 +52,6 @@ const ImageManipulation = (props: Props) =>{
     const { onBack } = props
     const [selectedFile, setSelectedFile] = useState<Blob | MediaSource | undefined>()
     const [previewImage, setPreviewImage] = useState<string>('')
-    const [selectedImageBase64, setSelectedImageBase64] = useState<string>('')
 
     const [displayLoader, setDisplayLoader] = useState(false)
 
@@ -83,7 +82,6 @@ const ImageManipulation = (props: Props) =>{
         const jimpRead = await Jimp.read(selectedImageURL)
         
         jimpRead.getBase64(Jimp.MIME_JPEG, (err, src) =>{
-            setSelectedImageBase64(src)
             setPreviewImage(src)
         })
         setDisplayLoader(false)
@@ -101,7 +99,6 @@ const ImageManipulation = (props: Props) =>{
     const reset = () =>{
         setSelectedFile(undefined)
         setPreviewImage('')
-        setSelectedImageBase64('')
     }
 
    const editOperation = async(imageURL: string, editValue: number) =>{
