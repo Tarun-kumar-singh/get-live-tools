@@ -11,11 +11,12 @@ import ImageBlur from '../../components/image/ImageBlur';
 import ImageRotation from '../../components/image/ImageRotation';
 import ColorManipulation from '../../components/image/ImageManipulation';
 import ImageManipulation from '../../components/image/ImageManipulation';
+import ChangeFormat from '../../components/image/ChangeFormat';
  
 const getToolsComponent = (componentName: string, onBack: () => void) => {
 
-  if(componentName === 'ImageBlackNWhite'){
-  //  return <ImgBlankNWhite />
+  if(componentName === 'ChangeFormat'){
+   return <ChangeFormat onBack={onBack}/>
   }
 
   if(componentName === 'EditImage'){

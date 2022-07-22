@@ -114,11 +114,10 @@ const ImageManipulation = (props: Props) =>{
     
     if(selectedOperation === 'brightness'){
         resultImage = image.rotate(editValue);
-     }
-     else if(selectedOperation === 'contrast'){
+    }
+    else if(selectedOperation === 'contrast'){
         resultImage = image.contrast(editValue)
-     }
- 
+    }
     else if(selectedOperation === 'opacity'){
         resultImage = image.opacity(editValue) 
     }
