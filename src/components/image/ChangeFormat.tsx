@@ -1,5 +1,5 @@
 import { Button, Stack } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AppLoader from "../share/appLoader";
 import Image from 'next/image'
 import Jimp from 'jimp';
@@ -20,6 +20,8 @@ const ChangeFormat = (props: Props) =>{
 
     const { onBack } = props
 
+
+
     const [selectedFile, setSelectedFile] = useState<Blob | MediaSource | undefined>()
     const [previewImage, setPreviewImage] = useState<string>('')
     const [selectedImageBase64, setSelectedImageBase64] = useState<string>('')
@@ -30,6 +32,10 @@ const ChangeFormat = (props: Props) =>{
     const [selectedImageUrl, setSelectedImageUrl] = useState('')
 
     const [changeFormatValue, setChangeFormatValue] = useState('')
+
+    useEffect(() =>{
+        console.log(changeFormatValue)
+      }, [changeFormatValue])
 
     const onSelectFile = async(e: any) => {
         setDisplayLoader(true)
@@ -56,21 +62,21 @@ const ChangeFormat = (props: Props) =>{
         setDisplayLoader(true)
         const jimpRead = await Jimp.read(selectedImageUrl)
         
-        jimpRead.getBase64(type, (err, src) =>{
+        jimpRead.getBase64(changeFormatValue, (err, src) =>{
             setSelectedImageBase64(src)
             setPreviewImage(src)
             setDisplayLoader(false)
-            downloadImageFromBase64(src, `Image.${type}`)
+            downloadImageFromBase64(src, `Image.${type.split('/')[1]}`)
         })
 
     }
 
     const downloadImageFromBase64 = (base64Data: string, name: string) =>{
+        console.log(name)
         var a = document.createElement("a"); //Create <a>
         a.href = base64Data; //Image Base64 Goes here
         a.download = name; //File name Here
         a.click(); //Downloaded file
-    
     }
     
     return(
