@@ -1,4 +1,4 @@
-import { Button, ToggleButton, ToggleButtonGroup } from "@mui/material";
+import { Button, Checkbox, FormControlLabel, FormGroup, ToggleButton, ToggleButtonGroup } from "@mui/material";
 import { useState } from "react";
 import SelectImage from "../share/SelectImage";
 import Jimp from 'jimp';
@@ -20,7 +20,9 @@ const ImageFlip = (props: Props) => {
 
     const [selectedImageUrl, setSelectedImageUrl] = useState('')
 
-    const [selectedFlipType, setSelectedFlipType] = useState('')
+    const [selectedFlipValue, setSelectedFlipValue] = useState({ h: false, v: false })
+
+    const [resultImage, setResultImage] = useState('')
 
     const onSelectFile = async(e: any) => {
         setDisplayLoader(true)
@@ -32,7 +34,13 @@ const ImageFlip = (props: Props) => {
         setImageType(e.target.files[0].type)
         const selectedImageURL = URL.createObjectURL(e.target.files[0])
         setSelectedImageUrl(selectedImageURL)
-        setDisplayLoader(false)
+        
+        const jimpRead = await Jimp.read(selectedImageURL)
+        jimpRead.getBase64(e.target.files[0].type, (err, src) =>{
+            setResultImage(src)
+            setDisplayLoader(false)
+        })
+
     }
 
     const reset = () =>{
@@ -46,12 +54,7 @@ const ImageFlip = (props: Props) => {
 
     const onDownload = async() =>{
         setDisplayLoader(true)
-        const jimpRead = await Jimp.read(selectedImageUrl)
-        const editedImage = jimpRead.greyscale()
-        editedImage.getBase64(imageType, (err, src) =>{
-            setDisplayLoader(false)
-            downloadImageFromBase64(src, `Image.${imageType.split('/')[1]}`)
-        })   
+        downloadImageFromBase64(resultImage, `Image.${imageType.split('/')[1]}`)
     }
 
     const downloadImageFromBase64 = (base64Data: string, name: string) =>{
@@ -61,16 +64,17 @@ const ImageFlip = (props: Props) => {
         a.click(); //Downloaded file
     }
 
-    const selectFlipType = async(e: any, value: any) =>{
-        console.log(value)
-        setSelectedFlipType(value)
+    const onFlipImage = async() =>{
+        console.log(selectedFlipValue)
         const resImg = await Jimp.read(selectedImageUrl)
         const flipedImg = resImg.flip(true, true)
-       
-        flipedImg.getBase64( imageType, (err, src) =>{
-            setSelectedImageUrl(src)
-        })
-        
+        flipedImg.getBase64(imageType, (err, src) =>{
+            setResultImage(src)
+        })   
+    }
+
+    const flipValueChange = () =>{
+
     }
 
     return(
@@ -80,20 +84,11 @@ const ImageFlip = (props: Props) => {
             </div>
             <div style={{ display:'flex', justifyContent:'center', alignItems:'center', flexDirection: 'column', gap: '10px'}}>
             {selectedImageUrl && 
-                <ToggleButtonGroup
-                    value={selectedFlipType}
-                    exclusive
-                    onChange={selectFlipType}
-                    size="small"
-                >
-                {
-                    FlipTypes.map((el: any, index) =>(
-                        <ToggleButton key={el.label} value={el.value}>
-                            {el.label}
-                        </ToggleButton>
-                    ))
-                }
-            </ToggleButtonGroup>
+                 <FormGroup>
+                    <FormControlLabel onChange={(e: any, val: any) => setSelectedFlipValue({ ...flipValueChange, h: value})} control={<Checkbox defaultChecked />} label={true} />
+                    <FormControlLabel control={<Checkbox defaultChecked />} label="Verticle" />
+                    <Button onClick={onFlipImage}>Flip</Button>
+               </FormGroup>
             }
                 {selectedImageUrl && 
                     <div style={{ marginTop: 0 }}>
