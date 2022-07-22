@@ -62,6 +62,14 @@ const ChangeFormat = (props: Props) =>{
     
     return(
         <>
+           <div>
+                <Typography variant="h6" sx={{
+                    textAlign: 'center',
+                    marginTop: '-40px'
+                }}>
+                        Change image format
+                </Typography>
+            </div>  
             <div style={{ marginLeft: '3%' }}>
                 <Button onClick={onClickBack} variant='outlined'>Back</Button>
             </div>

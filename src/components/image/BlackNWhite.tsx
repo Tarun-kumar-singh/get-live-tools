@@ -1,4 +1,4 @@
-import { Button } from "@mui/material"
+import { Button, Typography } from "@mui/material"
 import { useState } from "react"
 import Jimp from 'jimp';
 import SelectImage from "../share/SelectImage";
@@ -50,6 +50,14 @@ const BlackNWhite = (props: Props) => {
 
     return(
         <>
+            <div>
+              <Typography variant="h6" sx={{
+                textAlign: 'center',
+                marginTop: '-40px'
+              }}>
+                    Change to blank and white
+              </Typography>
+            </div>
             <div style={{ marginLeft: '3%' }}>
                 <Button onClick={onClickBack} variant='outlined'>Back</Button>
             </div>

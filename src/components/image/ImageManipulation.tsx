@@ -1,4 +1,4 @@
-import { Box, Button, Slider, ToggleButton, ToggleButtonGroup } from "@mui/material"
+import { Box, Button, Slider, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material"
 import { useEffect, useState } from "react"
 import Image from 'next/image'
 import Jimp from 'jimp';
@@ -158,6 +158,14 @@ const ImageManipulation = (props: Props) =>{
 
     return(
         <>
+          <div>
+              <Typography variant="h6" sx={{
+                textAlign: 'center',
+                marginTop: '-40px'
+              }}>
+                    Edit image
+              </Typography>
+            </div>  
             <div style={{ marginLeft: '3%' }}>
                 <Button onClick={onClickBack} variant='outlined'>Back</Button>
             </div>

@@ -1,4 +1,4 @@
-import { Button, Checkbox, FormControlLabel, FormGroup } from "@mui/material";
+import { Button, Checkbox, FormControlLabel, FormGroup, Typography } from "@mui/material";
 import { useState } from "react";
 import SelectImage from "../share/SelectImage";
 import Jimp from 'jimp';
@@ -72,6 +72,14 @@ const ImageFlip = (props: Props) => {
 
     return(
         <>
+            <div>
+              <Typography variant="h6" sx={{
+                textAlign: 'center',
+                marginTop: '-40px'
+              }}>
+                    Flip image
+              </Typography>
+            </div>  
             <div style={{ marginLeft: '3%' }}>
                 <Button onClick={onClickBack} variant='outlined'>Back</Button>
             </div>
