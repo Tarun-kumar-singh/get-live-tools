@@ -10,6 +10,7 @@ import ChangeFormat from '../../components/image/ChangeFormat';
 import BlackNWhite from '../../components/image/BlackNWhite';
 import ImageFlip from '../../components/image/ImageFlip';
 import InvertColor from '../../components/image/InvertColor';
+import ImageCrop from '../../components/image/ImageCrop';
  
 const getToolsComponent = (componentName: string, onBack: () => void) => {
 
@@ -28,6 +29,9 @@ const getToolsComponent = (componentName: string, onBack: () => void) => {
   else if(componentName === 'InvertColor'){
     return <InvertColor onBack={onBack} />
   } 
+  else if(componentName === 'ImageCrop'){
+    return <ImageCrop onBack={onBack} />
+  }
 }
 
 const Index: NextPage = () => {
