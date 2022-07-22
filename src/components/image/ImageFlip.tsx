@@ -58,13 +58,16 @@ const ImageFlip = (props: Props) => {
         a.href = base64Data; //Image Base64 Goes here
         a.download = name; //File name Here
         a.click(); //Downloaded file
+        setDisplayLoader(false)
     }
 
     const onFlipImage = async() =>{
+        setDisplayLoader(true)
         const resImg = await Jimp.read(selectedImageUrl)
         const flipedImg = resImg.flip(flipValue.h, flipValue.v)
         flipedImg.getBase64(imageType, (err, src) =>{
             setResultImage(src)
+            setDisplayLoader(false)
         })   
     }
 
@@ -99,8 +102,8 @@ const ImageFlip = (props: Props) => {
                     selectedImageUrl={resultImage}
                 />
                 {
-                selectedImageUrl && 
-                    <Button onClick={onDownload}>Downlaod</Button>
+                    selectedImageUrl && 
+                        <Button onClick={onDownload}>Downlaod</Button>
                 }   
             </div>
         </>
