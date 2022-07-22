@@ -131,7 +131,7 @@ const ImageManipulation = (props: Props) =>{
         resultImage = image.blur(editValue) 
     }
 
-    (resultImage as any).getBase64(Jimp.MIME_JPEG, (err: any, src: any) =>{
+    (resultImage as any).getBase64(selectedImageType, (err: any, src: any) =>{
         setPreviewImage(src)
         setDisplayLoader(false)
     })
