@@ -6,14 +6,22 @@ type Props = {
     onSelectFile: (e: any) => void,
     displayLoader: boolean,
     selectedImageUrl: string,
-    onDownload: () => void
+    onDownload: () => void,
+    reset: () => void
 }
 const SelectImage = (props:Props) =>{
 
-    const { displayLoader, onSelectFile, onDownload, selectedImageUrl } = props
+    const { displayLoader, reset, onSelectFile, onDownload, selectedImageUrl } = props
 
     return(
         <>
+            <div>
+                {selectedImageUrl && 
+                    <div style={{ marginTop: 0 }}>
+                        <Button disabled={displayLoader} onClick={reset} variant="text">Upload another image</Button> 
+                    </div>
+                }
+            </div>
                 <div style={{ display:'flex', justifyContent:'center', alignItems:'center', width: '200px', height: '250px', border: '2px black', borderStyle: 'dotted'}}>
                         {!selectedImageUrl ? 
                             <Button disabled={displayLoader} variant="contained" component="label">

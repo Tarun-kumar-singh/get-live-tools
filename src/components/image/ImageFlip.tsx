@@ -91,16 +91,12 @@ const ImageFlip = (props: Props) => {
                     <Button onClick={onFlipImage}>Flip</Button>
                </FormGroup>
             }
-                {selectedImageUrl && 
-                    <div style={{ marginTop: 0 }}>
-                        <Button disabled={displayLoader} onClick={reset} variant="text">Upload another image</Button> 
-                    </div>
-                }
                 <SelectImage
                     displayLoader={displayLoader}
                     onSelectFile={onSelectFile}
                     selectedImageUrl={resultImage}
                     onDownload={onDownload}
+                    reset={reset}
                 />
                
             </div>

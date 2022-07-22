@@ -60,18 +60,14 @@ const BlackNWhite = (props: Props) => {
                 <Button onClick={onClickBack} variant='outlined'>Back</Button>
             </div>
             <div style={{ display: 'flex', justifyContent: 'center', marginTop:'5px', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>         
-            {selectedImageUrl && 
-                <div style={{ marginTop: 0 }}>
-                    <Button disabled={displayLoader} onClick={reset} variant="text">Upload another image</Button> 
-                </div>
-            }
                 <SelectImage
                     displayLoader={displayLoader}
                     onSelectFile={onSelectFile}
                     selectedImageUrl={selectedImageUrl}
                     onDownload={onDownload}
+                    reset={reset}
                 /> 
-                </div>        
+            </div>        
         </>
     )
 
