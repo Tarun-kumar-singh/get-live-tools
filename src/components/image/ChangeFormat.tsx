@@ -1,4 +1,4 @@
-import { Button, Stack } from "@mui/material";
+import { Button, Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import AppLoader from "../share/appLoader";
 import Image from 'next/image'
@@ -47,9 +47,7 @@ const ChangeFormat = (props: Props) =>{
     const changeFormatType = async(type: string) =>{
         setDisplayLoader(true)
         const jimpRead = await Jimp.read(selectedImageUrl)
-        console.log(changeFormatValue)
         jimpRead.getBase64(changeFormatValue, (err, src) =>{
-            console.log(err)
             setDisplayLoader(false)
             downloadImageFromBase64(src, `Image.${type.split('/')[1]}`)
         })
@@ -57,7 +55,6 @@ const ChangeFormat = (props: Props) =>{
     }
 
     const downloadImageFromBase64 = (base64Data: string, name: string) =>{
-       console.log(name)
         var a = document.createElement("a"); //Create <a>
         a.href = base64Data; //Image Base64 Goes here
         a.download = name; //File name Here
@@ -72,7 +69,7 @@ const ChangeFormat = (props: Props) =>{
 
             <div style={{ display: 'flex', justifyContent: 'center', marginTop:'5px', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>         
                
-                <div>{imageType}</div>
+                <Typography variant="h6">Uploaded type: {imageType}</Typography>
                 <div style={{ display:'flex', justifyContent:'center', alignItems:'center', width: '200px', height: '250px', border: '2px black', borderStyle: 'dotted'}}>
                     {!selectedImageUrl ? 
                         <Button disabled={displayLoader} variant="contained" component="label">
@@ -93,7 +90,7 @@ const ChangeFormat = (props: Props) =>{
                     }  
                 </div>
 
-                <Stack direction='column' style={{ marginTop: '20px' }}>
+                {selectedImageUrl && <Stack direction='column' style={{ marginTop: '20px' }}>
                     <SelectMenuField
                         menuData={menuData}
                         value={changeFormatValue}
@@ -101,7 +98,7 @@ const ChangeFormat = (props: Props) =>{
                         label='Selct format'
                     />
                     <Button style={{marginTop: '20px'}} size="small" disabled={!changeFormatValue} onClick={() => changeFormatType(changeFormatValue)}> Download</Button>
-                </Stack>     
+                </Stack>}     
                 
             </div>
         </>
