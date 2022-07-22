@@ -9,6 +9,7 @@ import ImageManipulation from '../../components/image/ImageManipulation';
 import ChangeFormat from '../../components/image/ChangeFormat';
 import BlackNWhite from '../../components/image/BlackNWhite';
 import ImageFlip from '../../components/image/ImageFlip';
+import InvertColor from '../../components/image/InvertColor';
  
 const getToolsComponent = (componentName: string, onBack: () => void) => {
 
@@ -24,8 +25,9 @@ const getToolsComponent = (componentName: string, onBack: () => void) => {
    else if(componentName === 'FlipImage'){
     return <ImageFlip onBack={onBack} />
    } 
-   
-
+   else if(componentName === 'InvertColor'){
+    return <InvertColor onBack={onBack} />
+   } 
 }
 
 const Index: NextPage = () => {
@@ -79,7 +81,7 @@ const Index: NextPage = () => {
                   <ToolsCard onToolCardClick={() => onToolCardClick(el)} key={el.label} title={el.label} />
                 ))
             }
-          </Box >
+          </Box>
       }
 
     </>
