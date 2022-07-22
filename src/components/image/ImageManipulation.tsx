@@ -59,6 +59,8 @@ const ImageManipulation = (props: Props) =>{
     const [selectedOperation, setSelectedOperation] = useState('')
     const [selectedOperationValue, setSelectedOperationValue] = useState({} as any) // OperatioValue[selectedOperation]
 
+    const [selectedImageType, setSelectedImageType] = useState('')
+
     const onClickBack = () =>{
         onBack()
     }
@@ -78,10 +80,12 @@ const ImageManipulation = (props: Props) =>{
         }
         
         setSelectedFile(e.target.files[0])
+        const imgType = e.target.files[0].type
+        setSelectedImageType(imgType)
         const selectedImageURL = URL.createObjectURL(e.target.files[0])
         const jimpRead = await Jimp.read(selectedImageURL)
         
-        jimpRead.getBase64(Jimp.MIME_JPEG, (err, src) =>{
+        jimpRead.getBase64(imgType, (err, src) =>{
             setPreviewImage(src)
         })
         setDisplayLoader(false)
