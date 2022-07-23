@@ -14,7 +14,6 @@ import InvertColor from '../../components/image/InvertColor';
 import ImageCrop from '../../components/image/ImageCrop';
 import ImageLighten from '../../components/image/ImageLighten';
 import ImageCircle from '../../components/image/ImageCircle';
-import ImageShadow from '../../components/image/ImageShadow';
  
 const getToolsComponent = (componentName: string, onBack: () => void) => {
 
@@ -41,9 +40,6 @@ const getToolsComponent = (componentName: string, onBack: () => void) => {
   }
   else if(componentName === 'ImageCicle'){
     return <ImageCircle onBack={onBack} />
-  }
-  else if(componentName === 'ImageShadow'){
-    return <ImageShadow onBack={onBack} />
   }
 }
 
