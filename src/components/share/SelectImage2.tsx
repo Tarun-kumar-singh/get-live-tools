@@ -59,7 +59,7 @@ const SelectImage2 = (props:Props) =>{
                                 <Image
                                     src={selectedImage}
                                     alt="Image is not displyaing"
-                                    width={200}
+                                    width={300}
                                     height={250}
                                 />
                             </>
