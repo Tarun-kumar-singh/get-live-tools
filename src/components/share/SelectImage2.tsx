@@ -23,7 +23,8 @@ const SelectImage2 = (props:Props) =>{
                 flexDirection: 'row', 
                 justifyContent:'center',
                 flexWrap:'wrap', 
-                gap: '10px'
+                gap: '10px',
+                marginTop:'4px'
             }}
         >
             <div style={{ display:'flex', alignItems:'center', flexDirection: 'column'}}>
@@ -71,8 +72,8 @@ const SelectImage2 = (props:Props) =>{
             </div>
             
             {/* Result image */}
-            <div style={{ display:'flex', alignItems:'center', flexDirection: 'column', marginTop: '37px'}}>
-                {resultImage && 
+            {resultImage && <div style={{ display:'flex', alignItems:'center', flexDirection: 'column', marginTop: '37px'}}>
+                {/* {resultImage &&  */}
                     <>
                         <Box 
                             style={{ 
@@ -110,8 +111,8 @@ const SelectImage2 = (props:Props) =>{
                             }   
                         </div>
                     </>
-                }
-            </div>
+                {/* } */}
+            </div>}
 
         </Box>
 
