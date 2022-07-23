@@ -12,6 +12,7 @@ import ImageFlip from '../../components/image/ImageFlip';
 import InvertColor from '../../components/image/InvertColor';
 import ImageCrop from '../../components/image/ImageCrop';
 import ImageQuality from '../../components/image/ImageQuality';
+import ImageLighten from '../../components/image/ImageLighten';
  
 const getToolsComponent = (componentName: string, onBack: () => void) => {
 
@@ -36,6 +37,10 @@ const getToolsComponent = (componentName: string, onBack: () => void) => {
   else if(componentName === 'ImageQuality'){
     return <ImageQuality onBack={onBack} />
   }
+  else if(componentName === 'ImageLighten'){
+    return <ImageLighten onBack={onBack} />
+  }
+  
 }
 
 const Index: NextPage = () => {
