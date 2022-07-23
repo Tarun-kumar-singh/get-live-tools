@@ -13,6 +13,7 @@ import InvertColor from '../../components/image/InvertColor';
 import ImageCrop from '../../components/image/ImageCrop';
 import ImageQuality from '../../components/image/ImageQuality';
 import ImageLighten from '../../components/image/ImageLighten';
+import ImageCircle from '../../components/image/ImageCircle';
  
 const getToolsComponent = (componentName: string, onBack: () => void) => {
 
@@ -40,7 +41,9 @@ const getToolsComponent = (componentName: string, onBack: () => void) => {
   else if(componentName === 'ImageLighten'){
     return <ImageLighten onBack={onBack} />
   }
-  
+  else if(componentName === 'ImageCicle'){
+    return <ImageCircle onBack={onBack} />
+  }
 }
 
 const Index: NextPage = () => {
