@@ -12,7 +12,6 @@ import BlackNWhite from '../../components/image/BlackNWhite';
 import ImageFlip from '../../components/image/ImageFlip';
 import InvertColor from '../../components/image/InvertColor';
 import ImageCrop from '../../components/image/ImageCrop';
-import ImageQuality from '../../components/image/ImageQuality';
 import ImageLighten from '../../components/image/ImageLighten';
 import ImageCircle from '../../components/image/ImageCircle';
 import ImageShadow from '../../components/image/ImageShadow';
@@ -36,9 +35,6 @@ const getToolsComponent = (componentName: string, onBack: () => void) => {
   } 
   else if(componentName === 'ImageCrop'){
     return <ImageCrop onBack={onBack} />
-  }
-  else if(componentName === 'ImageQuality'){
-    return <ImageQuality onBack={onBack} />
   }
   else if(componentName === 'ImageLighten'){
     return <ImageLighten onBack={onBack} />
