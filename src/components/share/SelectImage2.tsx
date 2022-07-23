@@ -23,7 +23,7 @@ const SelectImage2 = (props:Props) =>{
                 flexDirection: 'row', 
                 justifyContent:'center',
                 flexWrap:'wrap', 
-                gap: '10vw'
+                gap: '10px'
             }}
         >
             <div style={{ display:'flex', alignItems:'center', flexDirection: 'column'}}>
@@ -111,7 +111,8 @@ const SelectImage2 = (props:Props) =>{
                         </div>
                     </>
                 }
-           </div>
+            </div>
+
         </Box>
 
         </>

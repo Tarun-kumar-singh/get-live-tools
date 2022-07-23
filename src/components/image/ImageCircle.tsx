@@ -80,9 +80,7 @@ const ImageCircle = (props: Props) => {
                 style={{ 
                     display:'flex',  
                     flexDirection:'row',
-                    gap: '10px',
                     justifyContent:'center',
-                    alignContent:'center',
                     flexWrap:'wrap'
                 }}
 
@@ -95,9 +93,11 @@ const ImageCircle = (props: Props) => {
                     onDownload={onDownload}
                     reset={reset}
                 />
+            </Box>
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center',marginTop: '10px' }}>
                 {selectedImageUrl && !resultImage && 
                     <Button disabled={displayLoader} onClick={lightenImage} variant="contained">Circle image</Button>}
-            </Box>
+            </div>
         </>
     )
 
