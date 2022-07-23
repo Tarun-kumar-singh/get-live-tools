@@ -10,6 +10,7 @@ export const ImageTools: ToolsType = [
     {label: 'Crop image', name: 'ImageCrop'},
     {label: 'Change Image quality', name: 'ImageQuality'},
     {label: 'Lighten scanned images', name: 'ImageLighten'},
-    {label: 'Circle an images', name: 'ImageCicle'}
+    {label: 'Circle an images', name: 'ImageCicle'},
+    {label: 'Create shadow on image', name: 'ImageShadow'}
 
 ]

@@ -5,6 +5,7 @@ import { ImageTools } from '../../constants/tools/image';
 import { useEffect, useState } from 'react';
 import {useRouter} from 'next/router';
 import { addTagToUrl, getURlTagValue } from '../../hooks/useTagUrl';
+
 import ImageManipulation from '../../components/image/ImageManipulation';
 import ChangeFormat from '../../components/image/ChangeFormat';
 import BlackNWhite from '../../components/image/BlackNWhite';
@@ -14,6 +15,7 @@ import ImageCrop from '../../components/image/ImageCrop';
 import ImageQuality from '../../components/image/ImageQuality';
 import ImageLighten from '../../components/image/ImageLighten';
 import ImageCircle from '../../components/image/ImageCircle';
+import ImageShadow from '../../components/image/ImageShadow';
  
 const getToolsComponent = (componentName: string, onBack: () => void) => {
 
@@ -43,6 +45,9 @@ const getToolsComponent = (componentName: string, onBack: () => void) => {
   }
   else if(componentName === 'ImageCicle'){
     return <ImageCircle onBack={onBack} />
+  }
+  else if(componentName === 'ImageShadow'){
+    return <ImageShadow onBack={onBack} />
   }
 }
 

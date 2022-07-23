@@ -52,7 +52,8 @@ const ImageCircle = (props: Props) => {
         downloadImageFromBase64(resultImage, `Image.${imageType.split('/')[1]}`)
     }
 
-    const lightenImage = async() =>{
+    const edit = async() =>{
+        setDisplayLoader(true)
        const jimpRead = await Jimp.read(selectedImageUrl)
        const resultImg = jimpRead.circle()
        resultImg.getBase64(imageType, (err, src) =>{
@@ -96,7 +97,7 @@ const ImageCircle = (props: Props) => {
             </Box>
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center',marginTop: '10px' }}>
                 {selectedImageUrl && !resultImage && 
-                    <Button disabled={displayLoader} onClick={lightenImage} variant="contained">Circle image</Button>}
+                    <Button disabled={displayLoader} onClick={edit} variant="contained">Circle image</Button>}
             </div>
         </>
     )
