@@ -7,5 +7,6 @@ export const ImageTools: ToolsType = [
     {label: 'Change to Black and white format', name: 'BlackNWhite' },
     {label: 'Flip image', name: 'FlipImage' },
     {label: 'Invert color of image', name: 'InvertColor' },
-    {label: 'Crop image', name: 'ImageCrop'}
+    {label: 'Crop image', name: 'ImageCrop'},
+    {label: 'Change Image quality', name: 'ImageQuality'}
 ]

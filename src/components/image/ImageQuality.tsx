@@ -1,13 +1,13 @@
-import { Button, Checkbox, FormControlLabel, FormGroup, Typography } from "@mui/material";
-import { useState } from "react";
-import SelectImage from "../share/SelectImage";
+import { Typography, Button, FormGroup, FormControlLabel, Checkbox } from "@mui/material"
+import { useState } from "react"
+import SelectImage from "../share/SelectImage"
 import Jimp from 'jimp';
 import { downloadImageFromBase64 } from "../../utils/image";
 
 type Props = {
-    onBack: () => void;
+    onBack: () => void
 }
-const ImageFlip = (props: Props) => {
+const ImageQuality = (props: Props) => {
 
     const { onBack } = props
 
@@ -16,9 +16,8 @@ const ImageFlip = (props: Props) => {
 
     const [selectedImageUrl, setSelectedImageUrl] = useState('')
 
-    const [flipValue, setFlipValue] = useState({ h: false, v: false } as any)
-
     const [resultImage, setResultImage] = useState('')
+
 
     const onSelectFile = async(e: any) => {
         setDisplayLoader(true)
@@ -53,23 +52,6 @@ const ImageFlip = (props: Props) => {
         downloadImageFromBase64(resultImage, `Image.${imageType.split('/')[1]}`)
     }
 
-    const onFlipImage = async() =>{
-        setDisplayLoader(true)
-        const resImg = await Jimp.read(selectedImageUrl)
-        const flipedImg = resImg.flip(flipValue.h, flipValue.v)
-        flipedImg.getBase64(imageType, (err, src) =>{
-            setResultImage(src)
-            setDisplayLoader(false)
-        })   
-    }
-
-    const flipValueChange = (name: string, value: any) =>{
-        setFlipValue({
-            ...flipValue,
-            [name]: value
-        })
-    }   
-
     return(
         <>
             <div>
@@ -77,20 +59,13 @@ const ImageFlip = (props: Props) => {
                 textAlign: 'center',
                 marginTop: '-40px'
               }}>
-                    Flip image
+                    Change image quality
               </Typography>
             </div>  
             <div style={{ marginLeft: '3%' }}>
                 <Button onClick={onClickBack} variant='outlined'>Back</Button>
             </div>
             <div style={{ display:'flex', justifyContent:'center', alignItems:'center', flexDirection: 'column', gap: '10px'}}>
-            {selectedImageUrl && 
-                 <FormGroup>
-                    <FormControlLabel value={flipValue.h} onChange={(e: any, val: any) => flipValueChange('h', val)} control={<Checkbox />} label='Horizontal' />
-                    <FormControlLabel value={flipValue.v} onChange={(e: any, val: any) => flipValueChange('v', val)} control={<Checkbox />} label="Verticle" />
-                    <Button variant="contained" disabled={displayLoader} onClick={onFlipImage}>Flip</Button>
-               </FormGroup>
-            }
                 <SelectImage
                     displayLoader={displayLoader}
                     onSelectFile={onSelectFile}
@@ -105,4 +80,5 @@ const ImageFlip = (props: Props) => {
 
 }
 
-export default ImageFlip;
+
+export default ImageQuality;

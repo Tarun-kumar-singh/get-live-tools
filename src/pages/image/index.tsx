@@ -11,6 +11,7 @@ import BlackNWhite from '../../components/image/BlackNWhite';
 import ImageFlip from '../../components/image/ImageFlip';
 import InvertColor from '../../components/image/InvertColor';
 import ImageCrop from '../../components/image/ImageCrop';
+import ImageQuality from '../../components/image/ImageQuality';
  
 const getToolsComponent = (componentName: string, onBack: () => void) => {
 
@@ -31,6 +32,9 @@ const getToolsComponent = (componentName: string, onBack: () => void) => {
   } 
   else if(componentName === 'ImageCrop'){
     return <ImageCrop onBack={onBack} />
+  }
+  else if(componentName === 'ImageQuality'){
+    return <ImageQuality onBack={onBack} />
   }
 }
 
