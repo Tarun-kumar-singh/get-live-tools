@@ -9,6 +9,6 @@ export const ImageTools: ToolsType = [
     {label: 'Invert color of image', name: 'InvertColor' },
     {label: 'Crop image', name: 'ImageCrop'},
     {label: 'Change Image quality', name: 'ImageQuality'},
-    {label: 'Image lighten', name: 'ImageLighten'}
+    {label: 'Lighten scanned images', name: 'ImageLighten'}
 
 ]

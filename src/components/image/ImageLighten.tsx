@@ -19,7 +19,7 @@ const LightenImage = (props: Props) => {
     const [changeFormatValue, setChangeFormatValue] = useState('')
 
     const [resultImage, setResultImage] = useState('')
-    const [silderValue, setSliderValue] = useState<any>('')
+    const [silderValue, setSliderValue] = useState<any>(255)
 
     const onSelectFile = async(e: any) => {
         setDisplayLoader(true)
@@ -30,13 +30,10 @@ const LightenImage = (props: Props) => {
     
         setImageType((e.target.files[0].type))
         const selectedImageURL = URL.createObjectURL(e.target.files[0])
-        setSelectedImageUrl(selectedImageURL)
-        setDisplayLoader(false)
- 
+        setSelectedImageUrl(selectedImageURL) 
            
         const jimpRead = await Jimp.read(selectedImageURL)
-        const resultImg = jimpRead.threshold({ max: 0 });
-
+        const resultImg = jimpRead.threshold({ max: 255, autoGreyscale: false })
         resultImg.getBase64(e.target.files[0].type, (err, src) =>{
             setResultImage(src)
             setDisplayLoader(false)
@@ -59,6 +56,7 @@ const LightenImage = (props: Props) => {
         setImageType('')
         setSelectedImageUrl('')
         setResultImage('')
+        setSliderValue(255)
     }
     
     const onDownload = async() =>{
@@ -75,8 +73,8 @@ const LightenImage = (props: Props) => {
     }
 
     const lightenImage = async(imgUrl: string, val:any) =>{
-        const jimpRead = await Jimp.read(imgUrl)
-       const resultImg = jimpRead.threshold({ max: val })
+       const jimpRead = await Jimp.read(imgUrl)
+       const resultImg = jimpRead.threshold({ max: val, autoGreyscale: false })
        resultImg.getBase64(imageType, (err, src) =>{
         setResultImage(src)
         setDisplayLoader(false)
@@ -91,7 +89,7 @@ const LightenImage = (props: Props) => {
                     textAlign: 'center',
                     marginTop: '-40px'
                 }}>
-                    Lighten image
+                    Lighten scanned images
                 </Typography>
             </div>  
             <div style={{ marginLeft: '3%' }}>
@@ -107,7 +105,8 @@ const LightenImage = (props: Props) => {
                     reset={reset}
                 />
                 <div>
-                <Slider
+                </div>
+                {selectedImageUrl && <Slider
                        onChange={sliderValueChange}
                         size="small"
                         value={silderValue}
@@ -122,8 +121,7 @@ const LightenImage = (props: Props) => {
                             }
                         }}
                         onChangeCommitted={onCommitSliderValue}
-                    />
-                </div>
+                    />}
             </div>
         </>
     )
