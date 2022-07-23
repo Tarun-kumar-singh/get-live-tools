@@ -23,11 +23,14 @@ const SelectImage = (props:Props) =>{
                 }
             </div>
             <div style={{ display:'flex', justifyContent:'center', alignItems:'center', width: '200px', height: '250px', border: '2px black', borderStyle: 'dotted'}}>
-                    {!selectedImageUrl ? 
-                        <Button disabled={displayLoader} variant="contained" component="label">
-                                {displayLoader ? 'Uploading...' : 'Upload image'}
+                   <>
+                        {!selectedImageUrl && !displayLoader && <Button disabled={displayLoader} variant="contained" component="label">
+                            {displayLoader ? 'Uploading...' : 'Upload image'}
                             <input hidden onChange={onSelectFile} accept="image/*" multiple type="file" />
-                        </Button> : 
+                        </Button>}
+                   
+                  
+                    {selectedImageUrl && 
                         <>
                             <Image
                                 src={selectedImageUrl}
@@ -37,6 +40,7 @@ const SelectImage = (props:Props) =>{
                             />
                         </>
                     }
+                    </>
                             <div style={{ position:'absolute'}}>
                                 {displayLoader && <AppLoader />}
                             </div>
