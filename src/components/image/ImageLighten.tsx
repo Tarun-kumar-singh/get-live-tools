@@ -1,6 +1,7 @@
 import { Typography, Button, Stack, Slider } from "@mui/material"
 import Jimp from "jimp"
 import { useState } from "react"
+import { downloadImageFromBase64 } from "../../utils/image"
 import AppLoader from "../share/appLoader"
 import SelectMenuField from "../share/form/SelectMenuField"
 import SelectImage from "../share/SelectImage"
@@ -43,13 +44,6 @@ const LightenImage = (props: Props) => {
     
     const onClickBack = () =>{
         onBack()
-    }
-
-    const downloadImageFromBase64 = (base64Data: string, name: string) =>{
-        var a = document.createElement("a"); //Create <a>
-        a.href = base64Data; //Image Base64 Goes here
-        a.download = name; //File name Here
-        a.click(); //Downloaded file
     }
 
     const reset = () =>{
