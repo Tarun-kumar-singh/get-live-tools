@@ -94,12 +94,15 @@ const ImageCircle = (props: Props) => {
             <Box 
                 style={{ 
                     display:'flex',  
-                    flexDirection: 'column', 
-                    gap: '10px'
+                    flexDirection:'row',
+                    gap: '10px',
+                    justifyContent:'center',
+                    alignContent:'center',
+                    flexWrap:'wrap'
                 }}
                 sx={{
-                    justifyContent: { lg: 'flex-start', xs: 'center' },
-                    alignItems:  { lg: 'flex-start', xs: 'center' }
+                    // justifyContent: { lg: 'flex-start', xs: 'center' },
+                    // alignItems:  { lg: 'flex-start', xs: 'center' }
                 }}
             >
                 <SelectImage2

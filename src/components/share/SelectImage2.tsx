@@ -22,10 +22,9 @@ const SelectImage2 = (props:Props) =>{
                 display: 'flex', 
                 flexDirection: 'row', 
                 flexWrap:'wrap', 
-                gap: '4px'
+                gap: '10px'
             }}
-            >
-
+        >
             <div style={{ display:'flex', alignItems:'center', flexDirection: 'column'}}>
                 <div>
                     {selectedImage && 
@@ -65,51 +64,54 @@ const SelectImage2 = (props:Props) =>{
                             </>
                         }
                         </>
-                                <div style={{ position:'absolute'}}>
-                                    {displayLoader && <AppLoader />}
-                                </div>
+                        <div style={{ position:'absolute'}}>
+                            {displayLoader && <AppLoader />}
+                        </div>
                 </Box>
             </div>
             
             {/* Result image */}
-            {resultImage && <div style={{ display:'flex', alignItems:'center', flexDirection: 'column'}}>
-                <Box 
-                    style={{ 
-                        display:'flex', 
-                        justifyContent:'center', 
-                        alignItems:'center', 
-                        height: '250px', 
-                        border: '2px black', 
-                        borderStyle: 'dotted'
-                    }}
-                    sx={{
-                        width: { lg: '25vw', xs: '80vw' },
-                    }}
-                    >                   
-                    <>  
-                        {resultImage && 
-                            <>
-                                <Image
-                                    src={resultImage}
-                                    alt="Image is not displyaing"
-                                    width={200}
-                                    height={250}
-                                />
-                            </>
-                        }
-                        </>
-                                <div style={{ position:'absolute'}}>
-                                    {displayLoader && <AppLoader />}
-                                </div>
-                </Box>
-                <div>
-                    {
-                        resultImage && 
-                            <Button disabled={displayLoader} onClick={onDownload}>Downlaod</Button>
-                    }   
-                </div>
-            </div>}
-
+            <div style={{ display:'flex', alignItems:'center', flexDirection: 'column'}}>
+                {resultImage && 
+                    <>
+                        <Box 
+                            style={{ 
+                                display:'flex', 
+                                justifyContent:'center', 
+                                alignItems:'center', 
+                                height: '250px', 
+                                border: '2px black', 
+                                borderStyle: 'dotted'
+                            }}
+                            sx={{
+                                width: { lg: '25vw', xs: '80vw' },
+                            }}
+                            >                   
+                            <>  
+                                {resultImage && 
+                                    <>
+                                        <Image
+                                            src={resultImage}
+                                            alt="Image is not displyaing"
+                                            width={200}
+                                            height={250}
+                                        />
+                                    </>
+                                }
+                                </>
+                                        <div style={{ position:'absolute'}}>
+                                            {displayLoader && <AppLoader />}
+                                        </div>
+                        </Box>
+                        <div>
+                            {
+                                resultImage && 
+                                    <Button disabled={displayLoader} onClick={onDownload}>Downlaod</Button>
+                            }   
+                        </div>
+                    </>
+                }
+           </div>
         </Box>
 
         </>
