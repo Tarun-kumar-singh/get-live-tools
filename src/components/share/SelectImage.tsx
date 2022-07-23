@@ -35,11 +35,11 @@ const SelectImage = (props:Props) =>{
                                 width={200}
                                 height={250}
                             />
+                        </>
+                    }
                             <div style={{ position:'absolute'}}>
                                 {displayLoader && <AppLoader />}
                             </div>
-                        </>
-                    }
             </div>
             <div>
                 {
