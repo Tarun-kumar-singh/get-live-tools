@@ -1,8 +1,9 @@
-import { Typography, Button, Slider } from "@mui/material"
+import { Typography, Button, Slider, Box } from "@mui/material"
 import Jimp from "jimp"
 import { useState } from "react"
 import { downloadImageFromBase64 } from "../../utils/image"
 import SelectImage from "../share/SelectImage"
+import SelectImage2 from "../share/SelectImage2"
 
 type Props = {
     onBack: () => void
@@ -18,6 +19,8 @@ const ImageCircle = (props: Props) => {
     const [changeFormatValue, setChangeFormatValue] = useState('')
 
     const [resultImage, setResultImage] = useState('')
+    const [selectedImage, setSelectedImage] = useState('')
+
     const [silderValue, setSliderValue] = useState<any>(255)
 
     const onSelectFile = async(e: any) => {
@@ -88,33 +91,26 @@ const ImageCircle = (props: Props) => {
                 <Button onClick={onClickBack} variant='outlined'>Back</Button>
             </div>
 
-            <div style={{ display:'flex', justifyContent:'center', alignItems:'center', flexDirection: 'column', gap: '10px'}}>
-                <SelectImage
+            <Box 
+                style={{ 
+                    display:'flex',  
+                    flexDirection: 'column', 
+                    gap: '10px'
+                }}
+                sx={{
+                    justifyContent: { lg: 'flex-start', xs: 'center' },
+                    alignItems:  { lg: 'flex-start', xs: 'center' }
+                }}
+            >
+                <SelectImage2
                     displayLoader={displayLoader}
                     onSelectFile={onSelectFile}
-                    selectedImageUrl={resultImage}
+                    selectedImage={selectedImageUrl}
+                    resultImage={resultImage}
                     onDownload={onDownload}
                     reset={reset}
                 />
-                <div>
-                </div>
-                {selectedImageUrl && <Slider
-                       onChange={sliderValueChange}
-                        size="small"
-                        value={silderValue}
-                        min={0}
-                        max={255}
-                        step={1}
-                        valueLabelDisplay="on"
-                        sx={{
-                            width: {
-                                lg: '40%',
-                                xs: '80%'
-                            }
-                        }}
-                        onChangeCommitted={onCommitSliderValue}
-                    />}
-            </div>
+            </Box>
         </>
     )
 
