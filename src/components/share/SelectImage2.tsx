@@ -21,8 +21,9 @@ const SelectImage2 = (props:Props) =>{
             style={{ 
                 display: 'flex', 
                 flexDirection: 'row', 
+                justifyContent:'center',
                 flexWrap:'wrap', 
-                gap: '10px'
+                gap: '10vw'
             }}
         >
             <div style={{ display:'flex', alignItems:'center', flexDirection: 'column'}}>
@@ -51,8 +52,7 @@ const SelectImage2 = (props:Props) =>{
                                 {displayLoader ? 'Uploading...' : 'Upload image'}
                                 <input hidden onChange={onSelectFile} accept="image/*" multiple type="file" />
                             </Button>}
-                    
-                    
+                                    
                         {selectedImage && 
                             <>
                                 <Image
@@ -71,7 +71,7 @@ const SelectImage2 = (props:Props) =>{
             </div>
             
             {/* Result image */}
-            <div style={{ display:'flex', alignItems:'center', flexDirection: 'column'}}>
+            <div style={{ display:'flex', alignItems:'center', flexDirection: 'column', marginTop: '37px'}}>
                 {resultImage && 
                     <>
                         <Box 

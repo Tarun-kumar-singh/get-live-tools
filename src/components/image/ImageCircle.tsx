@@ -33,13 +33,7 @@ const ImageCircle = (props: Props) => {
         setImageType((e.target.files[0].type))
         const selectedImageURL = URL.createObjectURL(e.target.files[0])
         setSelectedImageUrl(selectedImageURL) 
-           
-        const jimpRead = await Jimp.read(selectedImageURL)
-        const resultImg = jimpRead.circle()
-        resultImg.getBase64(e.target.files[0].type, (err, src) =>{
-            setResultImage(src)
-            setDisplayLoader(false)
-        })
+        setDisplayLoader(false)
 
     }
     
@@ -58,18 +52,9 @@ const ImageCircle = (props: Props) => {
         downloadImageFromBase64(resultImage, `Image.${imageType.split('/')[1]}`)
     }
 
-    const sliderValueChange = (e: any, val: any) =>{
-        console.log(val)
-        setSliderValue(val)
-    }
-    const onCommitSliderValue = (e: any, value: any) =>{
-        setDisplayLoader(true)
-        lightenImage(selectedImageUrl, value)
-    }
-
-    const lightenImage = async(imgUrl: string, val:any) =>{
-       const jimpRead = await Jimp.read(imgUrl)
-       const resultImg = jimpRead.threshold({ max: val, autoGreyscale: false })
+    const lightenImage = async() =>{
+       const jimpRead = await Jimp.read(selectedImageUrl)
+       const resultImg = jimpRead.circle()
        resultImg.getBase64(imageType, (err, src) =>{
         setResultImage(src)
         setDisplayLoader(false)
@@ -100,10 +85,7 @@ const ImageCircle = (props: Props) => {
                     alignContent:'center',
                     flexWrap:'wrap'
                 }}
-                sx={{
-                    // justifyContent: { lg: 'flex-start', xs: 'center' },
-                    // alignItems:  { lg: 'flex-start', xs: 'center' }
-                }}
+
             >
                 <SelectImage2
                     displayLoader={displayLoader}
@@ -113,6 +95,8 @@ const ImageCircle = (props: Props) => {
                     onDownload={onDownload}
                     reset={reset}
                 />
+                {selectedImageUrl && !resultImage && 
+                    <Button disabled={displayLoader} onClick={lightenImage} variant="contained">Circle image</Button>}
             </Box>
         </>
     )
